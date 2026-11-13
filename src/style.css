@@ -669,3 +669,7 @@ body.modal-open {
   margin: 8px 0 0;
   font-size: 16px;
 }
+
+.share-image {
+  grid-column: 1 / -1;
+}

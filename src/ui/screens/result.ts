@@ -1,11 +1,12 @@
-// S4 結果（設計書 2章）。5つのマス・🟩の数・連続日数・シェア（画像は #6）
+// S4 結果（設計書 2章）。5つのマス・🟩の数・連続日数・シェア（コピー・X・画像付き）
 
 import { track } from '../../analytics';
 import { monthDay } from '../../core/date';
 import { greenCount, marksLine, shareText } from '../../core/share';
 import { t } from '../../i18n';
 import type { Session } from '../../session';
-import { copyText, openXIntent } from '../../share/share';
+import { renderResultImage } from '../../share/resultImage';
+import { canShareImage, copyText, openXIntent, shareWithImage } from '../../share/share';
 import type { Screen } from '../app';
 import { button, h } from '../dom';
 import { footer, portalLinks, topBar } from '../parts';
@@ -38,6 +39,19 @@ export function resultScreen(props: ResultProps): Screen {
             copyBtn,
           ])
         : h('p', { className: 'muted small', text: t('result.archiveNote') });
+
+      // 画像付きのシェア。タップの後に描くと iPhone で共有が止められるため、先に描いておき、
+      // 画像を共有できる端末だけにボタンを出す
+      if (session.canShare()) {
+        void renderResultImage({ number: session.puzzle.number, date: session.puzzle.date, marks, streak }).then((blob) => {
+          if (!blob || !canShareImage(blob) || !shareBlock.isConnected) return;
+          const b = button(t('result.shareImage'), () => {
+            track('share_click', { method: 'web_share' });
+            void shareWithImage(text(), blob);
+          }, 'btn share-image');
+          shareBlock.append(b);
+        });
+      }
 
       return h('div', { className: 'page' }, [
         topBar([button('←', props.onTop, 'btn-icon')]),
