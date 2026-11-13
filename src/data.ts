@@ -22,7 +22,7 @@ export type AppConfig = {
   defaultOptions: { firstToAct: string[]; facingBet: string[] };
   actions: Record<string, { kind: string; potFraction?: number }>;
   storageKey: string;
-  links: { portal: string; follow: string };
+  links: { portal: string; follow: string; googlePrivacy: string; gaOptout: string; vercelPrivacy: string };
   languages: {
     default: Locale;
     available: Locale[];

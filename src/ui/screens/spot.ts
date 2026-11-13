@@ -11,6 +11,7 @@ import type { Screen } from '../app';
 import { cardRow } from '../cards';
 import { button, h } from '../dom';
 import { termEl, withTerms } from '../glossaryTip';
+import { footer, settingsButton } from '../parts';
 
 export type SpotProps = {
   session: Session;
@@ -167,6 +168,7 @@ export function spotScreen(props: SpotProps): Screen {
         button('←', props.onBack, 'btn-icon'),
         h('span', { text: `${m}/${d} #${session.puzzle.number}` }),
         h('span', { className: 'progress', text: t('spot.progress', { i: index + 1, total: config.spotsPerDay }) }),
+        settingsButton(),
       ]),
       spot.history.length ? historyBlock(spot) : null,
       tableBlock(spot),
@@ -179,7 +181,7 @@ export function spotScreen(props: SpotProps): Screen {
   return {
     render() {
       host = h('div', { className: 'page spot' }, content());
-      return h('div', {}, [host, h('footer', { className: 'disclaimer', text: t('common.disclaimer') })]);
+      return h('div', {}, [host, footer()]);
     },
   };
 }

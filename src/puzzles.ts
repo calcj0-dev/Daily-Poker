@@ -2,6 +2,8 @@
 
 import type { DailyPuzzle } from './core/types';
 
+export type IndexEntry = { date: string; number: number };
+
 /** その日の問題を読む。なければ null */
 export async function loadPuzzle(date: string): Promise<DailyPuzzle | null> {
   try {
@@ -11,6 +13,18 @@ export async function loadPuzzle(date: string): Promise<DailyPuzzle | null> {
     return data.date === date ? data : null;
   } catch {
     return null;
+  }
+}
+
+/** 公開されている日の一覧（新しい順）。読めなければ空 */
+export async function loadIndex(): Promise<IndexEntry[]> {
+  try {
+    const res = await fetch('./puzzles/index.json', { cache: 'no-cache' });
+    if (!res.ok) return [];
+    const data = (await res.json()) as { days?: IndexEntry[] };
+    return [...(data.days ?? [])].sort((a, b) => (a.date < b.date ? 1 : -1));
+  } catch {
+    return [];
   }
 }
 

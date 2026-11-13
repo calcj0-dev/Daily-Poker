@@ -1,4 +1,4 @@
-// S1 トップ（設計書 2章）。今日の問題・次の問題までの時間
+// S1 トップ（設計書 2章）。今日の問題・次の問題までの時間・過去の問題・成績
 
 import { monthDay, msUntilNextPuzzle } from '../../core/date';
 import { greenCount, marksLine } from '../../core/share';
@@ -6,12 +6,15 @@ import { t } from '../../i18n';
 import type { Session } from '../../session';
 import type { Screen } from '../app';
 import { button, h } from '../dom';
-import { disclaimer, languageSelect, versionEl } from '../parts';
+import { footer, topBar } from '../parts';
 
 export type TopProps = {
   /** 今日の問題。準備中なら null */
   session: Session | null;
   onPlay: () => void;
+  onResult: () => void;
+  onArchive: () => void;
+  onStats: () => void;
 };
 
 export function topScreen(props: TopProps): Screen {
@@ -35,7 +38,7 @@ export function topScreen(props: TopProps): Screen {
         h('p', { className: 'muted', text: t('home.done') }),
         h('p', { className: 'marks', text: marksLine(day.marks) }),
         h('p', { text: t('result.greens', { g: greenCount(day.marks) }) }),
-        button(t('home.seeResult'), props.onPlay, 'btn btn-primary'),
+        button(t('home.seeResult'), props.onResult, 'btn btn-primary'),
       );
     } else {
       children.push(button(next === 0 ? t('home.start') : t('home.continue'), props.onPlay, 'btn btn-primary'));
@@ -49,14 +52,15 @@ export function topScreen(props: TopProps): Screen {
       clearInterval(timer);
       timer = setInterval(() => (next.textContent = countdown()), 30_000);
       return h('div', { className: 'page' }, [
-        h('header', { className: 'top-bar' }, [versionEl(), languageSelect()]),
+        topBar(),
         h('main', { className: 'top' }, [
           h('h1', { className: 'app-name', text: t('app.name') }),
           h('p', { className: 'tagline', text: t('app.tagline') }),
           todayBlock(),
           next,
+          h('div', { className: 'top-links' }, [button(t('home.archive'), props.onArchive, 'btn'), button(t('home.stats'), props.onStats, 'btn')]),
         ]),
-        disclaimer(),
+        footer(),
       ]);
     },
     dispose() {

@@ -124,6 +124,10 @@
   },
   "privacy": {
     "heading": "Privacy",
-    "body": "<日本語の文が決まってから訳す>"
+    "body": "<日本語の文が決まってから訳す>",
+    "bodyBasic": "<日本語の文が決まってから訳す>",
+    "googlePolicy": "Google Privacy Policy",
+    "optout": "Google Analytics Opt-out Add-on",
+    "vercelPolicy": "Vercel Privacy Policy"
   }
 }

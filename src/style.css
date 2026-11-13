@@ -181,7 +181,7 @@ select {
 /* ---- S2 問題 ---- */
 .spot-bar {
   display: grid;
-  grid-template-columns: 44px 1fr auto;
+  grid-template-columns: 44px 1fr auto 44px;
   align-items: center;
   gap: 8px;
   min-height: 52px;
@@ -455,4 +455,217 @@ select {
 
 .loss {
   font-weight: 700;
+}
+
+/* ---- 共通の並び ---- */
+.top-bar-left {
+  margin-right: auto;
+}
+
+.top-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+}
+
+.footer {
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+
+.footer .disclaimer {
+  padding: 0;
+}
+
+.link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text-sub);
+  font-size: 13px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ---- 重ねて出す窓 ---- */
+body.modal-open {
+  overflow: hidden;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: rgb(0 0 0 / 0.4);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.modal-panel {
+  width: 100%;
+  max-width: var(--app-width);
+  max-height: 85dvh;
+  overflow-y: auto;
+  background: var(--bg);
+  border-radius: 16px 16px 0 0;
+  padding: 8px var(--gutter) calc(16px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-head h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.label {
+  font-size: 13px;
+  color: var(--text-sub);
+}
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-choice.selected {
+  border: 2px solid var(--primary);
+  font-weight: 700;
+}
+
+.gloss {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gloss dt {
+  font-weight: 700;
+}
+
+.gloss dd {
+  margin: 0;
+  color: var(--text-sub);
+  font-size: 14px;
+}
+
+.grading {
+  font-size: 14px;
+}
+
+/* ---- S4 結果 ---- */
+.result {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding-top: 16px;
+}
+
+.result-title {
+  margin: 0;
+  font-size: 24px;
+}
+
+.marks-lg {
+  font-size: 40px;
+}
+
+.result-greens {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.share-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+}
+
+.portal {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ---- S5 過去の問題・S6 成績 ---- */
+.list-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.list-page h1 {
+  margin: 8px 0 0;
+  font-size: 22px;
+}
+
+.archive-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.archive-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat-tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.stat-tile {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.sub-heading {
+  margin: 8px 0 0;
+  font-size: 16px;
 }

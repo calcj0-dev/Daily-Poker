@@ -1,40 +1,104 @@
-// 起動。今日（日本時間）の問題を読み、トップを出す。
-// URL に ?sample を付けると見本の問題で遊べる（画面の確認用。記録は保存しない。公開前に外す）
+// 起動と画面のつなぎ。今日（日本時間）の問題を読み、トップを出す。
+// URL に ?sample を付けると見本の問題で遊べる（画面の確認用。見本の日を「今日」として扱い、記録は保存しない。公開前に外す）
 
 import './style.css';
-import { initAnalytics } from './analytics';
+import { initAnalytics, track } from './analytics';
 import { config, isLocale } from './data';
 import { puzzleDate } from './core/date';
+import type { DailyPuzzle } from './core/types';
 import { setLocale } from './i18n';
-import { loadPuzzle, loadSample } from './puzzles';
+import { loadIndex, loadPuzzle, loadSample, type IndexEntry } from './puzzles';
 import { createSession, type Session } from './session';
-import { createStore, store } from './storage';
+import { createStore, memoryStorage, store as deviceStore } from './storage';
 import { createApp } from './ui/app';
+import { archiveScreen } from './ui/screens/archive';
+import { resultScreen } from './ui/screens/result';
 import { spotScreen } from './ui/screens/spot';
+import { statsScreen } from './ui/screens/stats';
 import { topScreen } from './ui/screens/top';
 
-const saved = store.getLang();
+const saved = deviceStore.getLang();
 setLocale(isLocale(saved) ? saved : config.languages.default);
 initAnalytics();
 
 async function start(root: HTMLElement): Promise<void> {
   const app = createApp(root);
-  const sampleMode = new URLSearchParams(location.search).has('sample');
-  const puzzle = sampleMode ? await loadSample() : await loadPuzzle(puzzleDate());
-  const session: Session | null = puzzle
-    ? createSession(puzzle, sampleMode ? createStore(() => undefined) : store, { archive: false })
-    : null;
+  const sample = new URLSearchParams(location.search).has('sample') ? await loadSample() : null;
+  const memory = memoryStorage();
+  const store = sample ? createStore(() => memory) : deviceStore;
+  const today = sample ? () => sample.date : () => puzzleDate();
 
-  const goTop = () => app.show(topScreen({ session, onPlay: goPlay }));
-  function goPlay(): void {
-    if (!session) return;
-    if (session.next() === null) {
-      goTop();
-      return;
+  const sessions = new Map<string, Session>();
+  function sessionFor(puzzle: DailyPuzzle): Session {
+    let s = sessions.get(puzzle.date);
+    if (!s) {
+      s = createSession(puzzle, store, { today });
+      sessions.set(puzzle.date, s);
     }
-    app.show(spotScreen({ session, onBack: goTop, onFinish: goTop }));
+    return s;
   }
+  async function load(date: string): Promise<DailyPuzzle | null> {
+    if (sample) return date === sample.date ? sample : null;
+    return loadPuzzle(date);
+  }
+
+  let todayPuzzle = await load(today());
+
+  let atTop = false;
+  function goTop(): void {
+    atTop = true;
+    const session = todayPuzzle ? sessionFor(todayPuzzle) : null;
+    app.show(
+      topScreen({
+        session,
+        onPlay: () => session && goPlay(session),
+        onResult: () => session && goResult(session),
+        onArchive: goArchive,
+        onStats: goStats,
+      }),
+    );
+  }
+  function goPlay(session: Session): void {
+    atTop = false;
+    if (session.next() === null) return goResult(session);
+    app.show(spotScreen({ session, onBack: goTop, onFinish: () => goResult(session) }));
+  }
+  function goResult(session: Session): void {
+    atTop = false;
+    app.show(resultScreen({ session, onTop: goTop, onArchive: goArchive }));
+  }
+  async function goArchive(): Promise<void> {
+    atTop = false;
+    track('archive_open', {});
+    const entries: IndexEntry[] = sample ? [{ date: sample.date, number: sample.number }] : await loadIndex();
+    app.show(
+      archiveScreen({
+        entries,
+        days: () => store.read().days,
+        onTop: goTop,
+        onPick: async (e) => {
+          const p = await load(e.date);
+          if (p) goPlay(sessionFor(p));
+        },
+      }),
+    );
+  }
+  function goStats(): void {
+    atTop = false;
+    track('stats_open', {});
+    app.show(statsScreen({ store, today, onTop: goTop }));
+  }
+
   goTop();
+
+  // 日本時間の0時をまたいだら、次の問題を読み直す（開いたままの人のため。トップを見ているときだけ描き直す）
+  let shownDate = today();
+  setInterval(async () => {
+    if (today() === shownDate) return;
+    shownDate = today();
+    todayPuzzle = await load(shownDate);
+    if (atTop) goTop();
+  }, 60_000);
 }
 
 const root = document.querySelector<HTMLElement>('#app');

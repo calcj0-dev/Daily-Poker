@@ -60,7 +60,10 @@
   "storageKey": "daily-poker.v1",
   "links": {
     "portal": "https://ted-app-lab.vercel.app/?utm_source=daily_poker&utm_medium=referral&utm_campaign=daily_poker",
-    "follow": "https://x.com/shooojp19"
+    "follow": "https://x.com/shooojp19",
+    "googlePrivacy": "https://policies.google.com/privacy",
+    "gaOptout": "https://tools.google.com/dlpage/gaoptout",
+    "vercelPrivacy": "https://vercel.com/legal/privacy-policy"
   },
   "languages": {
     "default": "ja",

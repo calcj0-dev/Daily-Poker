@@ -124,6 +124,10 @@
   },
   "privacy": {
     "heading": "隱私說明",
-    "body": "<日本語の文が決まってから訳す>"
+    "body": "<日本語の文が決まってから訳す>",
+    "bodyBasic": "<日本語の文が決まってから訳す>",
+    "googlePolicy": "Google 隱私權政策",
+    "optout": "Google Analytics 停用外掛程式",
+    "vercelPolicy": "Vercel 隱私權政策"
   }
 }
