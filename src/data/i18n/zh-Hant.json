@@ -124,8 +124,8 @@
   },
   "privacy": {
     "heading": "隱私說明",
-    "body": "<日本語の文が決まってから訳す>",
-    "bodyBasic": "<日本語の文が決まってから訳す>",
+    "body": "Daily Poker 使用 Google Analytics 與 Vercel Analytics 來了解網站的使用情況。\nGoogle Analytics 會使用 Cookie 匿名收集使用情況，不會收集姓名、電子郵件等可識別個人的資訊。\n我們會匿名記錄題目編號、🟩🟨🟥 的結果、連續天數的大致區間，以及顯示語言。不會傳送你選擇的行動（例如跟注）或手牌。\n此裝置只會儲存你的作答紀錄與選擇的語言。\n若想停止記錄，請使用瀏覽器設定或 Google Analytics 停用外掛程式。",
+    "bodyBasic": "Daily Poker 使用 Vercel Analytics 來計算頁面瀏覽次數。\nVercel Analytics 不使用 Cookie，也不會收集姓名、電子郵件等可識別個人的資訊。\n你的作答與結果不會傳送到任何地方。\n此裝置只會儲存你的作答紀錄與選擇的語言。",
     "googlePolicy": "Google 隱私權政策",
     "optout": "Google Analytics 停用外掛程式",
     "vercelPolicy": "Vercel 隱私權政策"

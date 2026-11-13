@@ -124,8 +124,8 @@
   },
   "privacy": {
     "heading": "Privacy",
-    "body": "<日本語の文が決まってから訳す>",
-    "bodyBasic": "<日本語の文が決まってから訳す>",
+    "body": "Daily Poker uses Google Analytics and Vercel Analytics to understand how the site is used.\nGoogle Analytics uses cookies to collect usage data anonymously. We do not collect anything that identifies you, such as your name or email address.\nWe anonymously record the puzzle number, your 🟩🟨🟥 results, a rough range of your streak, and your display language. We never send the actions you chose (such as call) or your cards.\nThis device stores only your answers and your chosen language.\nTo stop this data collection, use your browser settings or the Google Analytics Opt-out Add-on.",
+    "bodyBasic": "Daily Poker uses Vercel Analytics to count page views.\nVercel Analytics does not use cookies. We do not collect anything that identifies you, such as your name or email address.\nYour answers and results are not sent anywhere.\nThis device stores only your answers and your chosen language.",
     "googlePolicy": "Google Privacy Policy",
     "optout": "Google Analytics Opt-out Add-on",
     "vercelPolicy": "Vercel Privacy Policy"
