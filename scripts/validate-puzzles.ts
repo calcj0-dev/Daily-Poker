@@ -4,7 +4,8 @@
 // 問題のフォルダの初期値は content/puzzles
 
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { validateAll, type PuzzleFile, type ValidationContext } from './lib/validate.ts';
 
 const root = new URL('..', import.meta.url);
@@ -23,16 +24,20 @@ const ctx: ValidationContext = {
   ) as ValidationContext['messages'],
 };
 
-const dirPath = new URL(`${dir.replace(/\\/g, '/').replace(/\/?$/, '/')}`, root);
+// 相対パスはリポジトリの場所から、絶対パス（C:\… など）はそのまま
+const dirPath = resolve(fileURLToPath(root), dir);
 const files: PuzzleFile[] = [];
 const parseErrors: string[] = [];
-if (existsSync(dirPath)) {
-  for (const name of readdirSync(dirPath).filter((n) => n.endsWith('.json') && n !== 'index.json').sort()) {
-    try {
-      files.push({ fileName: name, data: JSON.parse(readFileSync(new URL(name, dirPath), 'utf-8')) });
-    } catch (e) {
-      parseErrors.push(`${name}: JSON として読めません（${(e as Error).message}）`);
-    }
+if (!existsSync(dirPath)) {
+  // フォルダを間違えたまま「通った」と出さないように止める
+  console.error(`問題のフォルダがありません：${dirPath}`);
+  process.exit(1);
+}
+for (const name of readdirSync(dirPath).filter((n) => n.endsWith('.json') && n !== 'index.json').sort()) {
+  try {
+    files.push({ fileName: name, data: JSON.parse(readFileSync(join(dirPath, name), 'utf-8')) });
+  } catch (e) {
+    parseErrors.push(`${name}: JSON として読めません（${(e as Error).message}）`);
   }
 }
 
