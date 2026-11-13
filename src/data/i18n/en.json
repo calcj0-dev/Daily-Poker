@@ -1,12 +1,12 @@
 {
   "app": {
     "name": "Daily Poker",
-    "tagline": "Five spots a day. How close are you to the solver?",
+    "tagline": "Five spots a day. How close are you to GTO?",
     "version": "v{version}"
   },
   "common": {
     "disclaimer": "This is a free quiz for enjoying poker thinking. It does not encourage playing any game for real money.",
-    "solverNote": "Solver answers assume the ranges both players are likely to hold in this spot. Different assumptions give different answers.",
+    "solverNote": "GTO answers assume the ranges both players are likely to hold in this spot. Different assumptions give different answers.",
     "basisLink": "Assumptions",
     "privacyLink": "Privacy",
     "glossaryLink": "Glossary",
@@ -68,11 +68,11 @@
     "fold": "{who} folds"
   },
   "reveal": {
-    "green": "Solver move",
+    "green": "GTO move",
     "yellow": "Close",
     "red": "Mistake",
     "yourChoice": "You: {action}",
-    "solverMix": "Solver frequencies",
+    "solverMix": "GTO frequencies",
     "evLoss": "EV loss: {loss}BB ({pct}% of pot)",
     "evLossZero": "EV loss: almost none",
     "next": "Next spot",
@@ -120,7 +120,7 @@
   "basis": {
     "heading": "Assumptions",
     "body": "6-handed, 100BB effective, no rake. Only heads-up spots. Solver: postflop-solver (b-inary, free). Ranges are our own and are not a theoretical truth.",
-    "grading": "🟩 EV loss ≤ {g}% of pot   🟨 ≤ {y}%, or the solver takes it ≥ {f}% of the time   🟥 otherwise"
+    "grading": "🟩 EV loss ≤ {g}% of pot   🟨 ≤ {y}%, or GTO takes it ≥ {f}% of the time   🟥 otherwise"
   },
   "privacy": {
     "heading": "Privacy",

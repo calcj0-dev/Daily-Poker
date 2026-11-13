@@ -89,14 +89,15 @@
         }
       ],
       "explanation": {
-        "ja": "A ハイで賭けても、相手のもっと強い手は降りず、降りるのはもともとこちらが勝っている弱い手ばかりです。チェックすれば、タダで次のカードを見られ、A が出れば一気に強くなります。ここは賭けずに回すのがお手本です。",
-        "en": "Betting ace-high here folds out only weaker hands you already beat, while stronger hands keep calling. Checking lets you see the river for free, and an ace makes you much stronger. The solver checks behind.",
-        "zh-Hant": "拿 A 高牌下注時，更強的牌不會棄牌，會棄牌的大多是你本來就贏的弱牌。過牌可以免費看河牌，而且發出 A 時你會變得很強。範例解在這裡選擇過牌。"
+        "ja": "A ハイで賭けても、相手のもっと強い手は降りず、降りるのはもともとこちらが勝っている弱い手ばかりです。チェックすれば、タダで次のカードを見られ、A が出れば一気に強くなります。GTO はここで賭けずに回します。",
+        "en": "Betting ace-high here folds out only weaker hands you already beat, while stronger hands keep calling. Checking lets you see the river for free, and an ace makes you much stronger. GTO checks behind.",
+        "zh-Hant": "拿 A 高牌下注時，更強的牌不會棄牌，會棄牌的大多是你本來就贏的弱牌。過牌可以免費看河牌，而且發出 A 時你會變得很強。GTO 在這裡選擇過牌。"
       },
       "terms": [
         "check",
         "bet",
-        "turn"
+        "turn",
+        "gto"
       ],
       "solver": {
         "betSizes": {
@@ -223,13 +224,14 @@
         }
       ],
       "explanation": {
-        "ja": "（見本）ストレートの見込みはあるが、まだ何もできていない。先に賭けるより、チェックして相手の出方を見るのがお手本。",
-        "en": "(Sample) You have a straight draw but nothing made yet. The solver prefers checking to see what the opponent does.",
-        "zh-Hant": "（範例）有順子聽牌但還沒成牌。範例解傾向過牌，看對手怎麼行動。"
+        "ja": "（見本）ストレートの見込みはあるが、まだ何もできていない。先に賭けるより、チェックして相手の出方を見るのが GTO。",
+        "en": "(Sample) You have a straight draw but nothing made yet. GTO prefers checking to see what the opponent does.",
+        "zh-Hant": "（範例）有順子聽牌但還沒成牌。GTO 傾向過牌，看對手怎麼行動。"
       },
       "terms": [
         "check",
-        "turn"
+        "turn",
+        "gto"
       ],
       "solver": {
         "tool": "postflop-solver",
@@ -340,15 +342,16 @@
         }
       ],
       "explanation": {
-        "ja": "（見本）A ハイで勝てる相手のブラフがある程度残っている。払う額は、払った後のポット全体の約3割なので、3割以上勝てればコールで得。お手本はコールとフォールドを混ぜる。",
-        "en": "(Sample) Ace-high still beats some of the opponent's bluffs. You need about 30% equity to call; the solver mixes call and fold.",
-        "zh-Hant": "（範例）A 高牌仍能贏對手的部分詐唬。跟注需要約 30% 勝率；範例解混合跟注與棄牌。"
+        "ja": "（見本）A ハイで勝てる相手のブラフがある程度残っている。払う額は、払った後のポット全体の約3割なので、3割以上勝てればコールで得。GTO はコールとフォールドを混ぜる。",
+        "en": "(Sample) Ace-high still beats some of the opponent's bluffs. You need about 30% equity to call; GTO mixes call and fold.",
+        "zh-Hant": "（範例）A 高牌仍能贏對手的部分詐唬。跟注需要約 30% 勝率；GTO 混合跟注與棄牌。"
       },
       "terms": [
         "call",
         "fold",
         "bluff",
-        "mixed"
+        "mixed",
+        "gto"
       ],
       "solver": {
         "tool": "postflop-solver",
@@ -460,14 +463,15 @@
         }
       ],
       "explanation": {
-        "ja": "（見本）Q ハイではほとんど勝てない。K が出て、相手より自分の方が強い手を多く持っていそうな場面。大きめに賭けるブラフがお手本。",
-        "en": "(Sample) Queen-high rarely wins at showdown, and the king favors your range. The solver bluffs with a larger size.",
-        "zh-Hant": "（範例）Q 高牌攤牌很少贏，而 K 對你的範圍有利。範例解用較大尺寸詐唬。"
+        "ja": "（見本）Q ハイではほとんど勝てない。K が出て、相手より自分の方が強い手を多く持っていそうな場面。大きめに賭けるブラフが GTO。",
+        "en": "(Sample) Queen-high rarely wins at showdown, and the king favors your range. GTO bluffs with a larger size.",
+        "zh-Hant": "（範例）Q 高牌攤牌很少贏，而 K 對你的範圍有利。GTO 用較大尺寸詐唬。"
       },
       "terms": [
         "bluff",
         "bet",
-        "river"
+        "river",
+        "gto"
       ],
       "solver": {
         "tool": "postflop-solver",
@@ -553,14 +557,15 @@
         }
       ],
       "explanation": {
-        "ja": "（見本）3ベットしたポットで、場より強いペア。小さく賭けて、相手の弱いペアや見込みのある手から払ってもらうのがお手本。",
-        "en": "(Sample) An overpair in a 3-bet pot. The solver bets small to get value from weaker pairs and draws.",
-        "zh-Hant": "（範例）3-bet 底池中的超對。範例解小注下注，從較弱的對子和聽牌中獲取價值。"
+        "ja": "（見本）3ベットしたポットで、場より強いペア。小さく賭けて、相手の弱いペアや見込みのある手から払ってもらうのが GTO。",
+        "en": "(Sample) An overpair in a 3-bet pot. GTO bets small to get value from weaker pairs and draws.",
+        "zh-Hant": "（範例）3-bet 底池中的超對。GTO 小注下注，從較弱的對子和聽牌中獲取價值。"
       },
       "terms": [
         "3bet",
         "value",
-        "bet"
+        "bet",
+        "gto"
       ],
       "solver": {
         "tool": "postflop-solver",

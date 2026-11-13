@@ -227,22 +227,22 @@
     },
     "gto": {
       "ja": {
-        "term": "お手本（GTO）",
-        "short": "相手にどう対応されても損しにくい打ち方。計算ソフトで求める"
+        "term": "GTO",
+        "short": "ゲーム理論で求めた、相手にどう対応されても損しにくい打ち方。計算ソフトで求める。このアプリの正解の基準"
       },
       "en": {
-        "term": "Solver answer (GTO)",
-        "short": "A strategy that is hard to exploit, computed by a solver"
+        "term": "GTO",
+        "short": "Game-theory optimal: a strategy that is hard to exploit, computed by a solver. The answer key in this app"
       },
       "zh-Hant": {
-        "term": "範例解（GTO）",
-        "short": "不易被針對的打法，由求解器算出"
+        "term": "GTO",
+        "short": "賽局理論最佳策略：不易被針對的打法，由求解器算出。本 App 的答案基準"
       }
     },
     "solver": {
       "ja": {
         "term": "ソルバー",
-        "short": "お手本を計算するソフト"
+        "short": "GTO を計算するソフト"
       },
       "en": {
         "term": "Solver",
@@ -326,7 +326,7 @@
     "mixed": {
       "ja": {
         "term": "混ぜる",
-        "short": "同じ手でも、ある割合で違う行動を選ぶこと。お手本ではよくある"
+        "short": "同じ手でも、ある割合で違う行動を選ぶこと。GTO ではよくある"
       },
       "en": {
         "term": "Mixed strategy",

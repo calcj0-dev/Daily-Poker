@@ -1,12 +1,12 @@
 {
   "app": {
     "name": "Daily Poker",
-    "tagline": "每天 5 題。你的判斷和範例解差多少？",
+    "tagline": "每天 5 題。你的判斷和 GTO 差多少？",
     "version": "v{version}"
   },
   "common": {
     "disclaimer": "本網站是享受撲克思考的免費測驗，不鼓勵參與任何以真錢下注的遊戲。",
-    "solverNote": "範例解是以「雙方在此情況下可能持有的手牌範圍」為前提計算的答案。前提不同，答案也會不同。",
+    "solverNote": "GTO 是以「雙方在此情況下可能持有的手牌範圍」為前提計算的答案。前提不同，答案也會不同。",
     "basisLink": "題目前提",
     "privacyLink": "隱私說明",
     "glossaryLink": "用語",
@@ -68,13 +68,13 @@
     "fold": "{who}棄牌"
   },
   "reveal": {
-    "green": "與範例解一致",
+    "green": "與 GTO 一致",
     "yellow": "差一點",
     "red": "虧了",
     "yourChoice": "你：{action}",
-    "solverMix": "範例解的比例",
-    "evLoss": "與範例解的差距：{loss}BB（底池的 {pct}%）",
-    "evLossZero": "與範例解的差距：幾乎沒有",
+    "solverMix": "GTO 的比例",
+    "evLoss": "與 GTO 的差距：{loss}BB（底池的 {pct}%）",
+    "evLossZero": "與 GTO 的差距：幾乎沒有",
     "next": "下一題",
     "toResult": "查看結果"
   },
@@ -120,7 +120,7 @@
   "basis": {
     "heading": "題目前提",
     "body": "6 人桌，所有人籌碼為 100BB，不抽水。只出兩人對決的情境。計算：postflop-solver（b-inary，免費）。手牌範圍為本站自行設定，並非理論上的正解。",
-    "grading": "🟩 與範例解的差距 ≤ 底池的 {g}%　🟨 ≤ {y}%，或範例解也有 {f}% 以上選擇此行動　🟥 其他"
+    "grading": "🟩 與 GTO 的差距 ≤ 底池的 {g}%　🟨 ≤ {y}%，或 GTO 也有 {f}% 以上選擇此行動　🟥 其他"
   },
   "privacy": {
     "heading": "隱私說明",

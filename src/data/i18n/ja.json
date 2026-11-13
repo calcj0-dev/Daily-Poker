@@ -1,12 +1,12 @@
 {
   "app": {
     "name": "Daily Poker",
-    "tagline": "毎日5問。お手本と比べて、あなたの判断は？",
+    "tagline": "毎日5問。GTO と比べて、あなたの判断は？",
     "version": "v{version}"
   },
   "common": {
     "disclaimer": "Daily Poker は、考え方を楽しむための無料のクイズです。お金を賭けるゲームへの参加をすすめるものではありません。",
-    "solverNote": "お手本は、計算ソフトが『この場面で2人が持っていそうな手』を前提に出した答えです。前提が変われば答えも変わります。",
+    "solverNote": "GTO は、計算ソフトが『この場面で2人が持っていそうな手』を前提に出した答えです。前提が変われば答えも変わります。",
     "basisLink": "問題の前提",
     "privacyLink": "プライバシーについて",
     "glossaryLink": "用語",
@@ -68,13 +68,13 @@
     "fold": "{who}がフォールド"
   },
   "reveal": {
-    "green": "お手本どおり",
+    "green": "GTO どおり",
     "yellow": "惜しい",
     "red": "損した",
     "yourChoice": "あなた：{action}",
-    "solverMix": "お手本の割合",
-    "evLoss": "お手本との差：{loss}BB（ポットの{pct}%）",
-    "evLossZero": "お手本との差：ほぼなし",
+    "solverMix": "GTO の割合",
+    "evLoss": "GTO との差：{loss}BB（ポットの{pct}%）",
+    "evLossZero": "GTO との差：ほぼなし",
     "next": "次の問題へ",
     "toResult": "結果を見る"
   },
@@ -120,7 +120,7 @@
   "basis": {
     "heading": "問題の前提",
     "body": "6人のテーブル、全員のチップは最低の賭け額の100倍、場代なし。2人が残った場面だけを出題。計算：postflop-solver（b-inary、無料）。持っていそうな手の前提は、Daily Poker が独自に作ったもので、理論上の正解ではありません。",
-    "grading": "🟩 お手本との差がポットの{g}%以下　🟨 {y}%以下、またはお手本も{f}%以上選ぶ行動　🟥 それより大きい"
+    "grading": "🟩 GTO との差がポットの{g}%以下　🟨 {y}%以下、または GTO も{f}%以上選ぶ行動　🟥 それより大きい"
   },
   "privacy": {
     "heading": "プライバシーについて",
