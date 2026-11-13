@@ -1,0 +1,129 @@
+{
+  "app": {
+    "name": "Daily Poker",
+    "tagline": "毎日5問。お手本と比べて、あなたの判断は？",
+    "version": "v{version}"
+  },
+  "common": {
+    "disclaimer": "Daily Poker は、考え方を楽しむための無料のクイズです。お金を賭けるゲームへの参加をすすめるものではありません。",
+    "solverNote": "お手本は、計算ソフトが『この場面で2人が持っていそうな手』を前提に出した答えです。前提が変われば答えも変わります。",
+    "basisLink": "問題の前提",
+    "privacyLink": "プライバシーについて",
+    "glossaryLink": "用語",
+    "close": "閉じる",
+    "portalLink": "つくった人のほかのアプリ（Ted App Lab）",
+    "follow": "つくった人をフォロー",
+    "aiNote": "解説は AI が翻訳しています",
+    "language": "言語",
+    "settings": "設定"
+  },
+  "home": {
+    "today": "{m}月{d}日の問題（#{n}）",
+    "start": "はじめる",
+    "continue": "続きから",
+    "done": "今日の5問は解きました",
+    "seeResult": "結果を見る",
+    "next": "次の問題まで {h}時間{min}分",
+    "archive": "過去の問題",
+    "stats": "成績",
+    "notReady": "今日の問題は準備中です。過去の問題で遊べます"
+  },
+  "spot": {
+    "progress": "{i} / {total}",
+    "hero": "あなた",
+    "villain": "相手",
+    "pot": "ポット {pot}BB",
+    "stack": "残り {stack}BB",
+    "facing": "相手が {amount}BB をベット",
+    "yourTurn": "あなたの番です",
+    "history": "ここまでの流れ"
+  },
+  "actionLabels": {
+    "check": "チェック",
+    "bet33": "ベット 1/3",
+    "bet67": "ベット 2/3",
+    "allin": "オールイン",
+    "fold": "フォールド",
+    "call": "コール",
+    "raise": "レイズ {amount}BB"
+  },
+  "streets": {
+    "flop": "フロップ",
+    "turn": "ターン",
+    "river": "リバー"
+  },
+  "positions": {
+    "UTG": "UTG",
+    "HJ": "HJ",
+    "CO": "CO",
+    "BTN": "BTN",
+    "SB": "SB",
+    "BB": "BB"
+  },
+  "historyActions": {
+    "raise": "{who}が {amount}BB にレイズ",
+    "call": "{who}がコール",
+    "check": "{who}がチェック",
+    "bet": "{who}が {amount}BB をベット",
+    "fold": "{who}がフォールド"
+  },
+  "reveal": {
+    "green": "お手本どおり",
+    "yellow": "惜しい",
+    "red": "損した",
+    "yourChoice": "あなた：{action}",
+    "solverMix": "お手本の割合",
+    "evLoss": "お手本との差：{loss}BB（ポットの{pct}%）",
+    "evLossZero": "お手本との差：ほぼなし",
+    "next": "次の問題へ",
+    "toResult": "結果を見る"
+  },
+  "result": {
+    "heading": "{m}月{d}日の結果",
+    "greens": "🟩 {g}つ（5問中）",
+    "streak": "連続 {n}日",
+    "share": "Xでシェア",
+    "copy": "結果をコピー",
+    "copied": "コピーしました",
+    "shareImage": "画像を付けてシェア",
+    "archiveNote": "過去の問題の結果はシェアできません"
+  },
+  "share": {
+    "text": "Daily Poker #{n} {m}/{d} 🟩{g}つ\n{marks}\n連続 {streak}日"
+  },
+  "stats": {
+    "heading": "成績",
+    "streak": "連続日数",
+    "maxStreak": "最長",
+    "played": "解いた日数",
+    "greenRate": "🟩の割合",
+    "byTag": "場面別の🟩の割合",
+    "empty": "まだ記録がありません",
+    "storageOff": "この端末では記録を保存できないため、成績は表示されません"
+  },
+  "tags": {
+    "flop": "フロップ",
+    "turn": "ターン",
+    "river": "リバー",
+    "betsize": "賭ける額",
+    "bluffcatch": "コールするか",
+    "bluff": "ブラフ",
+    "value": "バリュー",
+    "check": "チェックするか",
+    "3betpot": "3ベットポット"
+  },
+  "archive": {
+    "heading": "過去の問題",
+    "item": "#{n} {m}/{d}",
+    "played": "{g}/5"
+  },
+  "basis": {
+    "heading": "問題の前提",
+    "body": "6人のテーブル、全員のチップは最低の賭け額の100倍、場代なし。2人が残った場面だけを出題。計算：postflop-solver（b-inary、無料）。持っていそうな手の前提は、Daily Poker が独自に作ったもので、理論上の正解ではありません。",
+    "grading": "🟩 お手本との差がポットの{g}%以下　🟨 {y}%以下、またはお手本も{f}%以上選ぶ行動　🟥 それより大きい"
+  },
+  "privacy": {
+    "heading": "プライバシーについて",
+    "body": "（前作の文言をもとに作り、公開前にオーナーが確認する）"
+  }
+}

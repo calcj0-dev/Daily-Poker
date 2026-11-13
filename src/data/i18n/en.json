@@ -1,0 +1,129 @@
+{
+  "app": {
+    "name": "Daily Poker",
+    "tagline": "Five spots a day. How close are you to the solver?",
+    "version": "v{version}"
+  },
+  "common": {
+    "disclaimer": "This is a free quiz for enjoying poker thinking. It does not encourage playing any game for real money.",
+    "solverNote": "Solver answers assume the ranges both players are likely to hold in this spot. Different assumptions give different answers.",
+    "basisLink": "Assumptions",
+    "privacyLink": "Privacy",
+    "glossaryLink": "Glossary",
+    "close": "Close",
+    "portalLink": "More apps by the creator (Ted App Lab)",
+    "follow": "Follow the creator",
+    "aiNote": "Explanations are translated by AI",
+    "language": "Language",
+    "settings": "Settings"
+  },
+  "home": {
+    "today": "Puzzle #{n} — {m}/{d}",
+    "start": "Start",
+    "continue": "Continue",
+    "done": "You've finished today's 5 spots",
+    "seeResult": "See results",
+    "next": "Next puzzle in {h}h {min}m",
+    "archive": "Past puzzles",
+    "stats": "Stats",
+    "notReady": "Today's puzzle is not ready yet. Try a past puzzle."
+  },
+  "spot": {
+    "progress": "{i} / {total}",
+    "hero": "You",
+    "villain": "Opponent",
+    "pot": "Pot {pot}BB",
+    "stack": "Stack {stack}BB",
+    "facing": "Opponent bets {amount}BB",
+    "yourTurn": "Your action",
+    "history": "Action so far"
+  },
+  "actionLabels": {
+    "check": "Check",
+    "bet33": "Bet 1/3",
+    "bet67": "Bet 2/3",
+    "allin": "All-in",
+    "fold": "Fold",
+    "call": "Call",
+    "raise": "Raise {amount}BB"
+  },
+  "streets": {
+    "flop": "Flop",
+    "turn": "Turn",
+    "river": "River"
+  },
+  "positions": {
+    "UTG": "UTG",
+    "HJ": "HJ",
+    "CO": "CO",
+    "BTN": "BTN",
+    "SB": "SB",
+    "BB": "BB"
+  },
+  "historyActions": {
+    "raise": "{who} raises to {amount}BB",
+    "call": "{who} calls",
+    "check": "{who} checks",
+    "bet": "{who} bets {amount}BB",
+    "fold": "{who} folds"
+  },
+  "reveal": {
+    "green": "Solver move",
+    "yellow": "Close",
+    "red": "Mistake",
+    "yourChoice": "You: {action}",
+    "solverMix": "Solver frequencies",
+    "evLoss": "EV loss: {loss}BB ({pct}% of pot)",
+    "evLossZero": "EV loss: almost none",
+    "next": "Next spot",
+    "toResult": "See results"
+  },
+  "result": {
+    "heading": "Results for {m}/{d}",
+    "greens": "🟩 {g} of 5",
+    "streak": "Streak: {n} days",
+    "share": "Share on X",
+    "copy": "Copy results",
+    "copied": "Copied",
+    "shareImage": "Share with image",
+    "archiveNote": "Results of past puzzles can't be shared"
+  },
+  "share": {
+    "text": "Daily Poker #{n} {m}/{d} 🟩{g}/5\n{marks}\nStreak {streak}"
+  },
+  "stats": {
+    "heading": "Stats",
+    "streak": "Current streak",
+    "maxStreak": "Best streak",
+    "played": "Days played",
+    "greenRate": "🟩 rate",
+    "byTag": "🟩 rate by spot type",
+    "empty": "No records yet",
+    "storageOff": "Stats can't be saved on this device"
+  },
+  "tags": {
+    "flop": "Flop",
+    "turn": "Turn",
+    "river": "River",
+    "betsize": "Bet sizing",
+    "bluffcatch": "Bluff catching",
+    "bluff": "Bluffing",
+    "value": "Value betting",
+    "check": "Checking",
+    "3betpot": "3-bet pot"
+  },
+  "archive": {
+    "heading": "Past puzzles",
+    "item": "#{n} {m}/{d}",
+    "played": "{g}/5"
+  },
+  "basis": {
+    "heading": "Assumptions",
+    "body": "6-handed, 100BB effective, no rake. Only heads-up spots. Solver: postflop-solver (b-inary, free). Ranges are our own and are not a theoretical truth.",
+    "grading": "🟩 EV loss ≤ {g}% of pot   🟨 ≤ {y}%, or the solver takes it ≥ {f}% of the time   🟥 otherwise"
+  },
+  "privacy": {
+    "heading": "Privacy",
+    "body": "<日本語の文が決まってから訳す>"
+  }
+}

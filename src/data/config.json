@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "timezone": "Asia/Tokyo",
+  "spotsPerDay": 5,
+  "launchDate": null,
+  "grading": {
+    "greenMaxLossPctPot": 1,
+    "yellowMaxLossPctPot": 5,
+    "yellowMinSolverFreq": 0.1
+  },
+  "table": {
+    "players": 6,
+    "stackBB": 100,
+    "rake": 0,
+    "headsUpOnly": true,
+    "streets": [
+      "flop",
+      "turn",
+      "river"
+    ]
+  },
+  "defaultOptions": {
+    "firstToAct": [
+      "check",
+      "bet33",
+      "bet67",
+      "allin"
+    ],
+    "facingBet": [
+      "fold",
+      "call",
+      "raise"
+    ]
+  },
+  "actions": {
+    "check": {
+      "kind": "check"
+    },
+    "bet33": {
+      "kind": "bet",
+      "potFraction": 0.33
+    },
+    "bet67": {
+      "kind": "bet",
+      "potFraction": 0.67
+    },
+    "allin": {
+      "kind": "allin"
+    },
+    "fold": {
+      "kind": "fold"
+    },
+    "call": {
+      "kind": "call"
+    },
+    "raise": {
+      "kind": "raise"
+    }
+  },
+  "storageKey": "daily-poker.v1",
+  "links": {
+    "portal": "https://ted-app-lab.vercel.app/?utm_source=daily_poker&utm_medium=referral&utm_campaign=daily_poker",
+    "follow": "https://x.com/shooojp19"
+  },
+  "languages": {
+    "default": "ja",
+    "available": [
+      "ja",
+      "en",
+      "zh-Hant"
+    ],
+    "labels": {
+      "ja": "日本語",
+      "en": "English",
+      "zh-Hant": "繁體中文"
+    },
+    "machineTranslated": [
+      "en",
+      "zh-Hant"
+    ]
+  }
+}
