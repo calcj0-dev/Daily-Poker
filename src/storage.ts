@@ -13,6 +13,10 @@ export type DayRecord = {
   finished: boolean;
   /** その日の問題として解き終えたか（連続日数に数える。0時をまたいでも、その日に解き始めていれば true） */
   playedOnDay: boolean;
+  /** その日（日本時間）のうちに1問目に答えたか（決定メモ：0時をまたいだ日の扱い） */
+  startedOnDay?: boolean;
+  /** 答えた問題のタグ（成績の場面別に使う。設計書 6章に足したもの） */
+  tags?: (string[] | null)[];
 };
 
 export type SaveData = {
