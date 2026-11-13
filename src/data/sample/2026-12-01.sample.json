@@ -2,35 +2,35 @@
   "date": "2026-12-01",
   "number": 1,
   "sample": true,
-  "note": "見本のデータ。数字は計算していない（形を示すだけ）。公開用の検査では sample:true を通さない",
+  "note": "見本のデータ。1問目だけは本物の計算（お試しの1問）。2〜5問目の数字は計算していない（形を示すだけ）。公開用の検査では sample:true を通さない",
   "spots": [
     {
       "id": "2026-12-01-1",
       "index": 1,
       "tags": [
-        "flop",
-        "value",
-        "betsize"
+        "turn",
+        "check"
       ],
       "spotType": "srp_btn_bb",
       "hero": {
         "position": "BTN",
         "cards": [
-          "As",
-          "Kd"
+          "Ad",
+          "Jd"
         ]
       },
       "villain": {
         "position": "BB"
       },
       "board": [
-        "Kh",
-        "8s",
-        "3c"
+        "Qd",
+        "7c",
+        "3s",
+        "8h"
       ],
-      "street": "flop",
-      "potBB": 5.5,
-      "effectiveStackBB": 97.5,
+      "street": "turn",
+      "potBB": 9.1,
+      "effectiveStackBB": 95.7,
       "history": [
         {
           "street": "preflop",
@@ -47,53 +47,100 @@
           "street": "flop",
           "actor": "villain",
           "action": "check"
+        },
+        {
+          "street": "flop",
+          "actor": "hero",
+          "action": "bet",
+          "amountBB": 1.8
+        },
+        {
+          "street": "flop",
+          "actor": "villain",
+          "action": "call"
+        },
+        {
+          "street": "turn",
+          "actor": "villain",
+          "action": "check"
         }
       ],
       "facing": null,
       "options": [
         {
           "id": "check",
-          "freq": 0.2,
-          "evBB": 3.1
+          "freq": 1,
+          "evBB": 2.579
         },
         {
           "id": "bet33",
-          "freq": 0.75,
-          "evBB": 3.25
+          "freq": 0,
+          "evBB": 2.306
         },
         {
           "id": "bet67",
-          "freq": 0.05,
-          "evBB": 3.18
+          "freq": 0,
+          "evBB": 1.861
         },
         {
           "id": "allin",
           "freq": 0,
-          "evBB": 1.4
+          "evBB": -2.367
         }
       ],
       "explanation": {
-        "ja": "（見本）乾いたボードでトップペア。小さく何度も払ってもらうのがお手本。大きく賭けると、払ってくれる弱い手が降りてしまう。",
-        "en": "(Sample) Top pair on a dry board. The solver bets small to get called by many weaker hands; a big bet makes them fold.",
-        "zh-Hant": "（範例）乾燥牌面上的頂對。範例解是小注下注，讓許多較弱的牌跟注；下大注會讓它們棄牌。"
+        "ja": "A ハイで賭けても、相手のもっと強い手は降りず、降りるのはもともとこちらが勝っている弱い手ばかりです。チェックすれば、タダで次のカードを見られ、A が出れば一気に強くなります。ここは賭けずに回すのがお手本です。",
+        "en": "Betting ace-high here folds out only weaker hands you already beat, while stronger hands keep calling. Checking lets you see the river for free, and an ace makes you much stronger. The solver checks behind.",
+        "zh-Hant": "拿 A 高牌下注時，更強的牌不會棄牌，會棄牌的大多是你本來就贏的弱牌。過牌可以免費看河牌，而且發出 A 時你會變得很強。範例解在這裡選擇過牌。"
       },
       "terms": [
-        "pot",
+        "check",
         "bet",
-        "value"
+        "turn"
       ],
       "solver": {
-        "tool": "postflop-solver",
-        "commit": "<実行時に記録>",
-        "rangesVersion": "<範囲ファイルの版>",
-        "oopRange": "ranges/srp_btn_bb_oop.json",
+        "betSizes": {
+          "flop": {
+            "ip": {
+              "bet": "33%",
+              "raise": "3x"
+            },
+            "oop": {
+              "bet": "",
+              "raise": "3x"
+            }
+          },
+          "river": {
+            "ip": {
+              "bet": "67%",
+              "raise": "a"
+            },
+            "oop": {
+              "bet": "67%",
+              "raise": "a"
+            }
+          },
+          "turn": {
+            "ip": {
+              "bet": "33%,67%,a",
+              "raise": "3x"
+            },
+            "oop": {
+              "bet": "67%",
+              "raise": "3x"
+            }
+          }
+        },
+        "commit": "9d1509fe5077d019825f833eed04b16d342dfda1",
+        "exploitabilityPctPot": 0.2958,
         "ipRange": "ranges/srp_btn_bb_ip.json",
+        "oopRange": "ranges/srp_btn_bb_oop.json",
+        "rangesVersion": "oop:1 ip:1",
+        "solvedAt": "2026-11-14",
+        "spotFile": "solver/spots/trial-c1.json",
         "startStreet": "flop",
-        "betSizes": "<solver/spot ファイルに記録>",
         "targetExploitabilityPctPot": 0.3,
-        "exploitabilityPctPot": null,
-        "solvedAt": null,
-        "spotFile": "solver/spots/2026-12-01-1.json"
+        "tool": "postflop-solver"
       }
     },
     {

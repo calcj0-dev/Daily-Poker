@@ -2,7 +2,7 @@
 
 import { describe, expect, it } from 'vitest';
 import type { DailyPuzzle } from '../src/core/types';
-import sampleJson from '../src/data/sample/2026-12-01.sample.json';
+import sampleJson from './fixtures/2026-12-01.sample.json';
 import { jstDate, selectPublishable } from '../scripts/lib/publish';
 
 function day(date: string, number: number): { fileName: string; data: DailyPuzzle } {

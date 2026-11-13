@@ -8,7 +8,7 @@ import glossary from '../src/data/glossary.json';
 import en from '../src/data/i18n/en.json';
 import ja from '../src/data/i18n/ja.json';
 import zhHant from '../src/data/i18n/zh-Hant.json';
-import sample from '../src/data/sample/2026-12-01.sample.json';
+import sample from './fixtures/2026-12-01.sample.json';
 import { validateAll, validatePuzzle, validateStatic, type ValidationContext } from '../scripts/lib/validate';
 
 const ctx = { config, glossary, messages: { ja, en, 'zh-Hant': zhHant } } as unknown as ValidationContext;

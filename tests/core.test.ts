@@ -10,7 +10,7 @@ import { computeStats, currentStreak, maxStreak } from '../src/core/stats';
 import type { DailyPuzzle, Spot } from '../src/core/types';
 import { setLocale } from '../src/i18n';
 import { createStore, type DayRecord } from '../src/storage';
-import sampleJson from '../src/data/sample/2026-12-01.sample.json';
+import sampleJson from './fixtures/2026-12-01.sample.json';
 
 const sample = sampleJson as unknown as DailyPuzzle;
 const spot = (i: number) => sample.spots[i] as Spot;
