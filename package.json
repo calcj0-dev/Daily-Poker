@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "node scripts/copy-puzzles.ts && vite",
     "validate": "node scripts/validate-puzzles.ts",
-    "build": "node scripts/validate-puzzles.ts --release && tsc --noEmit && vite build",
+    "build": "node scripts/validate-puzzles.ts --release && node scripts/copy-puzzles.ts && tsc --noEmit && vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"

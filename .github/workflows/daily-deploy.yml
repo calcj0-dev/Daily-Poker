@@ -1,0 +1,24 @@
+# 毎日0時（日本時間）に Vercel を作り直し、その日の問題を公開する（設計書 5.2・U9）。
+# GitHub の自動実行は遅れることがあるため、0時と0時20分の2回呼ぶ。
+# 必要な設定：リポジトリの Secrets に VERCEL_DEPLOY_HOOK（Vercel の Deploy Hook の URL）
+name: daily-deploy
+
+on:
+  schedule:
+    - cron: '0 15 * * *'
+    - cron: '20 15 * * *'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Vercel を作り直す
+        env:
+          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "VERCEL_DEPLOY_HOOK が設定されていません" >&2
+            exit 1
+          fi
+          curl -fsS -X POST "$HOOK"

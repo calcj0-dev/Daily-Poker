@@ -91,12 +91,17 @@ async function start(root: HTMLElement): Promise<void> {
 
   goTop();
 
-  // 日本時間の0時をまたいだら、次の問題を読み直す（開いたままの人のため。トップを見ているときだけ描き直す）
+  // 1分おきに確かめる（開いたままの人のため。トップを見ているときだけ描き直す）
+  // ・日本時間の0時をまたいだら、次の問題を読む
+  // ・今日の問題がまだ無ければ（0時の作り直しが遅れているとき）、読み直し続ける（設計書 5.2・U9）
   let shownDate = today();
   setInterval(async () => {
-    if (today() === shownDate) return;
+    const changed = today() !== shownDate;
+    if (!changed && todayPuzzle) return;
     shownDate = today();
-    todayPuzzle = await load(shownDate);
+    const loaded = await load(shownDate);
+    if (!changed && !loaded) return;
+    todayPuzzle = loaded;
     if (atTop) goTop();
   }, 60_000);
 }
