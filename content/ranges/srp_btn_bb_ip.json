@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "id": "srp_btn_bb_ip",
+  "situation": "srp_btn_bb",
+  "player": "ip",
+  "label": {
+    "ja": "BTN が 2.5BB で最初に賭け金を上げ、BB が付いてきたときの BTN の手（上げた手のすべて）"
+  },
+  "short": {
+    "ja": "BTN が 2.5BB に上げたときの BTN"
+  },
+  "format": "postflop-solver の範囲の書き方（例：AA,AKs,AQo:0.5）",
+  "range": "22+,A2s+,K2s+,Q4s+,J6s+,T6s+,96s+,85s+,75s+,64s+,54s,A2o+,K8o+,Q9o+,J9o+,T8o+,98o",
+  "source": {
+    "ja": "Daily Poker 独自（理論上の正解ではない）。他社のレンジ表は使っていない"
+  },
+  "updatedAt": "2026-11-13"
+}

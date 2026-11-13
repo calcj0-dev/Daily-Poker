@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "id": "srp_co_bb_ip",
+  "situation": "srp_co_bb",
+  "player": "ip",
+  "label": {
+    "ja": "CO が 2.5BB で最初に賭け金を上げ、BB が付いてきたときの CO の手"
+  },
+  "short": {
+    "ja": "CO が 2.5BB に上げたときの CO"
+  },
+  "format": "postflop-solver の範囲の書き方（例：AA,AKs,AQo:0.5）",
+  "range": "22+,A2s+,K6s+,Q8s+,J8s+,T8s+,97s+,86s+,76s,65s,A8o+,KTo+,QTo+,JTo",
+  "source": {
+    "ja": "Daily Poker 独自（理論上の正解ではない）。他社のレンジ表は使っていない"
+  },
+  "updatedAt": "2026-11-13"
+}

@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "id": "srp_sb_bb_oop",
+  "situation": "srp_sb_bb",
+  "player": "oop",
+  "label": {
+    "ja": "SB が 2.5BB で最初に賭け金を上げ、BB が付いてきたときの SB の手"
+  },
+  "short": {
+    "ja": "SB が 2.5BB に上げたときの SB"
+  },
+  "format": "postflop-solver の範囲の書き方（例：AA,AKs,AQo:0.5）",
+  "range": "22+,A2s+,K2s+,Q5s+,J7s+,T7s+,97s+,86s+,75s+,65s,54s,A2o+,K9o+,Q9o+,J9o+,T9o",
+  "source": {
+    "ja": "Daily Poker 独自（理論上の正解ではない）。他社のレンジ表は使っていない"
+  },
+  "updatedAt": "2026-11-13"
+}
