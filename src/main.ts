@@ -1,53 +1,41 @@
-// 起動。#1 の時点では、作品名・バージョン・言語の切り替え・免責だけの空のページ
+// 起動。今日（日本時間）の問題を読み、トップを出す。
+// URL に ?sample を付けると見本の問題で遊べる（画面の確認用。記録は保存しない。公開前に外す）
 
 import './style.css';
-import { initAnalytics, track } from './analytics';
-import { config, isLocale, type Locale } from './data';
-import { getLocale, onLocaleChange, setLocale, t } from './i18n';
-import { store } from './storage';
-import { h } from './ui/dom';
-import { APP_VERSION } from './version';
+import { initAnalytics } from './analytics';
+import { config, isLocale } from './data';
+import { puzzleDate } from './core/date';
+import { setLocale } from './i18n';
+import { loadPuzzle, loadSample } from './puzzles';
+import { createSession, type Session } from './session';
+import { createStore, store } from './storage';
+import { createApp } from './ui/app';
+import { spotScreen } from './ui/screens/spot';
+import { topScreen } from './ui/screens/top';
 
 const saved = store.getLang();
 setLocale(isLocale(saved) ? saved : config.languages.default);
 initAnalytics();
 
-function languageSelect(): HTMLSelectElement {
-  const select = h(
-    'select',
-    { className: 'lang-select', attrs: { 'aria-label': t('common.language') } },
-    config.languages.available.map((l) => {
-      const opt = h('option', { text: config.languages.labels[l], attrs: { value: l } });
-      opt.selected = l === getLocale();
-      return opt;
-    }),
-  );
-  select.addEventListener('change', () => {
-    const next = select.value;
-    if (!isLocale(next)) return;
-    store.setLang(next);
-    setLocale(next as Locale);
-    track('lang_change', { to: next });
-  });
-  return select;
-}
+async function start(root: HTMLElement): Promise<void> {
+  const app = createApp(root);
+  const sampleMode = new URLSearchParams(location.search).has('sample');
+  const puzzle = sampleMode ? await loadSample() : await loadPuzzle(puzzleDate());
+  const session: Session | null = puzzle
+    ? createSession(puzzle, sampleMode ? createStore(() => undefined) : store, { archive: false })
+    : null;
 
-function render(root: HTMLElement): void {
-  root.replaceChildren(
-    h('header', { className: 'top-bar' }, [
-      h('span', { className: 'version', text: t('app.version', { version: APP_VERSION }) }),
-      h('label', { className: 'settings', attrs: { title: t('common.settings') } }, ['⚙', languageSelect()]),
-    ]),
-    h('main', { className: 'screen' }, [
-      h('h1', { className: 'app-name', text: t('app.name') }),
-      h('p', { className: 'tagline', text: t('app.tagline') }),
-    ]),
-    h('footer', { className: 'disclaimer', text: t('common.disclaimer') }),
-  );
+  const goTop = () => app.show(topScreen({ session, onPlay: goPlay }));
+  function goPlay(): void {
+    if (!session) return;
+    if (session.next() === null) {
+      goTop();
+      return;
+    }
+    app.show(spotScreen({ session, onBack: goTop, onFinish: goTop }));
+  }
+  goTop();
 }
 
 const root = document.querySelector<HTMLElement>('#app');
-if (root) {
-  render(root);
-  onLocaleChange(() => render(root));
-}
+if (root) void start(root);
