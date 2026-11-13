@@ -1,0 +1,533 @@
+{
+  "date": "2026-12-01",
+  "number": 1,
+  "sample": true,
+  "note": "見本のデータ。数字は計算していない（形を示すだけ）。公開用の検査では sample:true を通さない",
+  "spots": [
+    {
+      "id": "2026-12-01-1",
+      "index": 1,
+      "tags": [
+        "flop",
+        "value",
+        "betsize"
+      ],
+      "spotType": "srp_btn_bb",
+      "hero": {
+        "position": "BTN",
+        "cards": [
+          "As",
+          "Kd"
+        ]
+      },
+      "villain": {
+        "position": "BB"
+      },
+      "board": [
+        "Kh",
+        "8s",
+        "3c"
+      ],
+      "street": "flop",
+      "potBB": 5.5,
+      "effectiveStackBB": 97.5,
+      "history": [
+        {
+          "street": "preflop",
+          "actor": "hero",
+          "action": "raise",
+          "amountBB": 2.5
+        },
+        {
+          "street": "preflop",
+          "actor": "villain",
+          "action": "call"
+        },
+        {
+          "street": "flop",
+          "actor": "villain",
+          "action": "check"
+        }
+      ],
+      "facing": null,
+      "options": [
+        {
+          "id": "check",
+          "freq": 0.2,
+          "evBB": 3.1
+        },
+        {
+          "id": "bet33",
+          "freq": 0.75,
+          "evBB": 3.25
+        },
+        {
+          "id": "bet67",
+          "freq": 0.05,
+          "evBB": 3.18
+        },
+        {
+          "id": "allin",
+          "freq": 0,
+          "evBB": 1.4
+        }
+      ],
+      "explanation": {
+        "ja": "（見本）乾いたボードでトップペア。小さく何度も払ってもらうのがお手本。大きく賭けると、払ってくれる弱い手が降りてしまう。",
+        "en": "(Sample) Top pair on a dry board. The solver bets small to get called by many weaker hands; a big bet makes them fold.",
+        "zh-Hant": "（範例）乾燥牌面上的頂對。範例解是小注下注，讓許多較弱的牌跟注；下大注會讓它們棄牌。"
+      },
+      "terms": [
+        "pot",
+        "bet",
+        "value"
+      ],
+      "solver": {
+        "tool": "postflop-solver",
+        "commit": "<実行時に記録>",
+        "rangesVersion": "<範囲ファイルの版>",
+        "oopRange": "ranges/srp_btn_bb_oop.json",
+        "ipRange": "ranges/srp_btn_bb_ip.json",
+        "startStreet": "flop",
+        "betSizes": "<solver/spot ファイルに記録>",
+        "targetExploitabilityPctPot": 0.3,
+        "exploitabilityPctPot": null,
+        "solvedAt": null,
+        "spotFile": "solver/spots/2026-12-01-1.json"
+      }
+    },
+    {
+      "id": "2026-12-01-2",
+      "index": 2,
+      "tags": [
+        "turn",
+        "check"
+      ],
+      "spotType": "srp_btn_bb",
+      "hero": {
+        "position": "BB",
+        "cards": [
+          "5s",
+          "4s"
+        ]
+      },
+      "villain": {
+        "position": "BTN"
+      },
+      "board": [
+        "Kh",
+        "8s",
+        "3c",
+        "2d"
+      ],
+      "street": "turn",
+      "potBB": 9.1,
+      "effectiveStackBB": 95.7,
+      "history": [
+        {
+          "street": "preflop",
+          "actor": "villain",
+          "action": "raise",
+          "amountBB": 2.5
+        },
+        {
+          "street": "preflop",
+          "actor": "hero",
+          "action": "call"
+        },
+        {
+          "street": "flop",
+          "actor": "hero",
+          "action": "check"
+        },
+        {
+          "street": "flop",
+          "actor": "villain",
+          "action": "bet",
+          "amountBB": 1.8
+        },
+        {
+          "street": "flop",
+          "actor": "hero",
+          "action": "call"
+        }
+      ],
+      "facing": null,
+      "options": [
+        {
+          "id": "check",
+          "freq": 0.85,
+          "evBB": 1.6
+        },
+        {
+          "id": "bet33",
+          "freq": 0.1,
+          "evBB": 1.55
+        },
+        {
+          "id": "bet67",
+          "freq": 0.05,
+          "evBB": 1.5
+        },
+        {
+          "id": "allin",
+          "freq": 0,
+          "evBB": -2.1
+        }
+      ],
+      "explanation": {
+        "ja": "（見本）ストレートの見込みはあるが、まだ何もできていない。先に賭けるより、チェックして相手の出方を見るのがお手本。",
+        "en": "(Sample) You have a straight draw but nothing made yet. The solver prefers checking to see what the opponent does.",
+        "zh-Hant": "（範例）有順子聽牌但還沒成牌。範例解傾向過牌，看對手怎麼行動。"
+      },
+      "terms": [
+        "check",
+        "turn"
+      ],
+      "solver": {
+        "tool": "postflop-solver",
+        "commit": "<実行時に記録>",
+        "rangesVersion": "<範囲ファイルの版>",
+        "oopRange": "ranges/srp_btn_bb_oop.json",
+        "ipRange": "ranges/srp_btn_bb_ip.json",
+        "startStreet": "turn",
+        "betSizes": "<solver/spot ファイルに記録>",
+        "targetExploitabilityPctPot": 0.3,
+        "exploitabilityPctPot": null,
+        "solvedAt": null,
+        "spotFile": "solver/spots/2026-12-01-2.json"
+      }
+    },
+    {
+      "id": "2026-12-01-3",
+      "index": 3,
+      "tags": [
+        "river",
+        "bluffcatch"
+      ],
+      "spotType": "srp_btn_bb",
+      "hero": {
+        "position": "BB",
+        "cards": [
+          "Ah",
+          "9h"
+        ]
+      },
+      "villain": {
+        "position": "BTN"
+      },
+      "board": [
+        "Kd",
+        "8s",
+        "3c",
+        "7h",
+        "2d"
+      ],
+      "street": "river",
+      "potBB": 9.1,
+      "effectiveStackBB": 95.7,
+      "history": [
+        {
+          "street": "preflop",
+          "actor": "villain",
+          "action": "raise",
+          "amountBB": 2.5
+        },
+        {
+          "street": "preflop",
+          "actor": "hero",
+          "action": "call"
+        },
+        {
+          "street": "flop",
+          "actor": "hero",
+          "action": "check"
+        },
+        {
+          "street": "flop",
+          "actor": "villain",
+          "action": "bet",
+          "amountBB": 1.8
+        },
+        {
+          "street": "flop",
+          "actor": "hero",
+          "action": "call"
+        },
+        {
+          "street": "turn",
+          "actor": "hero",
+          "action": "check"
+        },
+        {
+          "street": "turn",
+          "actor": "villain",
+          "action": "check"
+        },
+        {
+          "street": "river",
+          "actor": "hero",
+          "action": "check"
+        }
+      ],
+      "facing": {
+        "action": "bet",
+        "amountBB": 6.1
+      },
+      "options": [
+        {
+          "id": "fold",
+          "freq": 0.42,
+          "evBB": 0
+        },
+        {
+          "id": "call",
+          "freq": 0.58,
+          "evBB": 0.12
+        },
+        {
+          "id": "raise",
+          "sizeBB": 18.3,
+          "freq": 0,
+          "evBB": -1.9
+        }
+      ],
+      "explanation": {
+        "ja": "（見本）A ハイで勝てる相手のブラフがある程度残っている。払う額は、払った後のポット全体の約3割なので、3割以上勝てればコールで得。お手本はコールとフォールドを混ぜる。",
+        "en": "(Sample) Ace-high still beats some of the opponent's bluffs. You need about 30% equity to call; the solver mixes call and fold.",
+        "zh-Hant": "（範例）A 高牌仍能贏對手的部分詐唬。跟注需要約 30% 勝率；範例解混合跟注與棄牌。"
+      },
+      "terms": [
+        "call",
+        "fold",
+        "bluff",
+        "mixed"
+      ],
+      "solver": {
+        "tool": "postflop-solver",
+        "commit": "<実行時に記録>",
+        "rangesVersion": "<範囲ファイルの版>",
+        "oopRange": "ranges/srp_btn_bb_oop.json",
+        "ipRange": "ranges/srp_btn_bb_ip.json",
+        "startStreet": "river",
+        "betSizes": "<solver/spot ファイルに記録>",
+        "targetExploitabilityPctPot": 0.3,
+        "exploitabilityPctPot": null,
+        "solvedAt": null,
+        "spotFile": "solver/spots/2026-12-01-3.json"
+      }
+    },
+    {
+      "id": "2026-12-01-4",
+      "index": 4,
+      "tags": [
+        "river",
+        "bluff"
+      ],
+      "spotType": "srp_co_bb",
+      "hero": {
+        "position": "CO",
+        "cards": [
+          "Qc",
+          "Jc"
+        ]
+      },
+      "villain": {
+        "position": "BB"
+      },
+      "board": [
+        "9d",
+        "5s",
+        "2h",
+        "Ks",
+        "4d"
+      ],
+      "street": "river",
+      "potBB": 9.1,
+      "effectiveStackBB": 95.7,
+      "history": [
+        {
+          "street": "preflop",
+          "actor": "hero",
+          "action": "raise",
+          "amountBB": 2.5
+        },
+        {
+          "street": "preflop",
+          "actor": "villain",
+          "action": "call"
+        },
+        {
+          "street": "flop",
+          "actor": "villain",
+          "action": "check"
+        },
+        {
+          "street": "flop",
+          "actor": "hero",
+          "action": "bet",
+          "amountBB": 1.8
+        },
+        {
+          "street": "flop",
+          "actor": "villain",
+          "action": "call"
+        },
+        {
+          "street": "turn",
+          "actor": "villain",
+          "action": "check"
+        },
+        {
+          "street": "turn",
+          "actor": "hero",
+          "action": "check"
+        },
+        {
+          "street": "river",
+          "actor": "villain",
+          "action": "check"
+        }
+      ],
+      "facing": null,
+      "options": [
+        {
+          "id": "check",
+          "freq": 0.3,
+          "evBB": 0.8
+        },
+        {
+          "id": "bet33",
+          "freq": 0,
+          "evBB": 0.4
+        },
+        {
+          "id": "bet67",
+          "freq": 0.7,
+          "evBB": 1.05
+        },
+        {
+          "id": "allin",
+          "freq": 0,
+          "evBB": 0.6
+        }
+      ],
+      "explanation": {
+        "ja": "（見本）Q ハイではほとんど勝てない。K が出て、相手より自分の方が強い手を多く持っていそうな場面。大きめに賭けるブラフがお手本。",
+        "en": "(Sample) Queen-high rarely wins at showdown, and the king favors your range. The solver bluffs with a larger size.",
+        "zh-Hant": "（範例）Q 高牌攤牌很少贏，而 K 對你的範圍有利。範例解用較大尺寸詐唬。"
+      },
+      "terms": [
+        "bluff",
+        "bet",
+        "river"
+      ],
+      "solver": {
+        "tool": "postflop-solver",
+        "commit": "<実行時に記録>",
+        "rangesVersion": "<範囲ファイルの版>",
+        "oopRange": "ranges/srp_co_bb_oop.json",
+        "ipRange": "ranges/srp_co_bb_ip.json",
+        "startStreet": "river",
+        "betSizes": "<solver/spot ファイルに記録>",
+        "targetExploitabilityPctPot": 0.3,
+        "exploitabilityPctPot": null,
+        "solvedAt": null,
+        "spotFile": "solver/spots/2026-12-01-4.json"
+      }
+    },
+    {
+      "id": "2026-12-01-5",
+      "index": 5,
+      "tags": [
+        "flop",
+        "3betpot",
+        "betsize"
+      ],
+      "spotType": "3bp_bb_btn",
+      "hero": {
+        "position": "BB",
+        "cards": [
+          "Qd",
+          "Qs"
+        ]
+      },
+      "villain": {
+        "position": "BTN"
+      },
+      "board": [
+        "Js",
+        "7d",
+        "4c"
+      ],
+      "street": "flop",
+      "potBB": 21.5,
+      "effectiveStackBB": 89.5,
+      "history": [
+        {
+          "street": "preflop",
+          "actor": "villain",
+          "action": "raise",
+          "amountBB": 2.5
+        },
+        {
+          "street": "preflop",
+          "actor": "hero",
+          "action": "raise",
+          "amountBB": 10.5
+        },
+        {
+          "street": "preflop",
+          "actor": "villain",
+          "action": "call"
+        }
+      ],
+      "facing": null,
+      "options": [
+        {
+          "id": "check",
+          "freq": 0.15,
+          "evBB": 12.1
+        },
+        {
+          "id": "bet33",
+          "freq": 0.8,
+          "evBB": 12.4
+        },
+        {
+          "id": "bet67",
+          "freq": 0.05,
+          "evBB": 12.2
+        },
+        {
+          "id": "allin",
+          "freq": 0,
+          "evBB": 9.8
+        }
+      ],
+      "explanation": {
+        "ja": "（見本）3ベットしたポットで、場より強いペア。小さく賭けて、相手の弱いペアや見込みのある手から払ってもらうのがお手本。",
+        "en": "(Sample) An overpair in a 3-bet pot. The solver bets small to get value from weaker pairs and draws.",
+        "zh-Hant": "（範例）3-bet 底池中的超對。範例解小注下注，從較弱的對子和聽牌中獲取價值。"
+      },
+      "terms": [
+        "3bet",
+        "value",
+        "bet"
+      ],
+      "solver": {
+        "tool": "postflop-solver",
+        "commit": "<実行時に記録>",
+        "rangesVersion": "<範囲ファイルの版>",
+        "oopRange": "ranges/3bp_bb_btn_oop.json",
+        "ipRange": "ranges/3bp_bb_btn_ip.json",
+        "startStreet": "flop",
+        "betSizes": "<solver/spot ファイルに記録>",
+        "targetExploitabilityPctPot": 0.3,
+        "exploitabilityPctPot": null,
+        "solvedAt": null,
+        "spotFile": "solver/spots/2026-12-01-5.json"
+      }
+    }
+  ]
+}
