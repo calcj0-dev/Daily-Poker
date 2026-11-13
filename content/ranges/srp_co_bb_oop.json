@@ -10,7 +10,7 @@
     "ja": "BB が CO に付いていく手"
   },
   "format": "postflop-solver の範囲の書き方（例：AA,AKs,AQo:0.5）",
-  "range": "22-TT,A6s-AJs,A2s-A4s,K5s-KQs,Q7s+,J7s+,T7s+,96s+,85s+,75s+,64s+,54s,A9o-AQo,KTo+,QTo+,JTo",
+  "range": "TT-22,AJs-A6s,A4s-A2s,KQs-K5s,Q7s+,J7s+,T7s+,96s+,85s+,75s+,64s+,54s,AQo-A9o,KTo+,QTo+,JTo",
   "source": {
     "ja": "Daily Poker 独自（理論上の正解ではない）。他社のレンジ表は使っていない"
   },

@@ -10,7 +10,7 @@
     "ja": "BB が SB に付いていく手"
   },
   "format": "postflop-solver の範囲の書き方（例：AA,AKs,AQo:0.5）",
-  "range": "22-88,A6s-ATs,A2s,K2s-KJs,Q2s+,J4s+,T5s+,95s+,84s+,74s+,63s+,53s+,43s,A2o-AJo,K5o-KQo,Q7o+,J7o+,T7o+,97o+,86o+,76o,65o",
+  "range": "88-22,ATs-A6s,A2s,KJs-K2s,Q2s+,J4s+,T5s+,95s+,84s+,74s+,63s+,53s+,43s,AJo-A2o,KQo-K5o,Q7o+,J7o+,T7o+,97o+,86o+,76o,65o",
   "source": {
     "ja": "Daily Poker 独自（理論上の正解ではない）。他社のレンジ表は使っていない"
   },

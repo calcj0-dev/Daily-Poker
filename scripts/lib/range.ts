@@ -1,5 +1,6 @@
 // レンジ（持っていそうな手の一覧）の読み取りと数え上げ（設計書 7.2）。
-// 書き方は postflop-solver と同じ：AA, AKs, AKo, AK, 22+, A2s+, K9o+, 22-99, A2s-A5s, 各項目に :0.5 で重み
+// 書き方は postflop-solver と同じ：AA, AKs, AKo, AK, 22+, A2s+, K9o+, 99-22, A5s-A2s, 各項目に :0.5 で重み。
+// 範囲（-）は postflop-solver に合わせて、強い方を先に書く
 
 export const RANKS = '23456789TJQKA';
 
@@ -32,6 +33,7 @@ export function expandToken(token: string): HandClass[] {
   // 22-99
   let m = /^([2-9TJQKA])\1-([2-9TJQKA])\2$/.exec(t);
   if (m) {
+    if (rankIndex(m[1]!) < rankIndex(m[2]!)) throw new Error(`範囲は強い方を先に書いてください：${t}`);
     const [a, b] = [rankIndex(m[1]!), rankIndex(m[2]!)].sort((x, y) => x - y);
     return Array.from({ length: b! - a! + 1 }, (_, k) => pair(a! + k));
   }
@@ -44,10 +46,11 @@ export function expandToken(token: string): HandClass[] {
   // AA
   m = /^([2-9TJQKA])\1$/.exec(t);
   if (m) return [pair(rankIndex(m[1]!))];
-  // A2s-A5s
+  // A5s-A2s
   m = /^([2-9TJQKA])([2-9TJQKA])([so])-([2-9TJQKA])([2-9TJQKA])([so])$/.exec(t);
   if (m) {
     if (m[1] !== m[4] || m[3] !== m[6]) throw new Error(`範囲の書き方が違います：${t}`);
+    if (rankIndex(m[2]!) < rankIndex(m[5]!)) throw new Error(`範囲は強い方を先に書いてください：${t}`);
     const hi = rankIndex(m[1]!);
     const [a, b] = [rankIndex(m[2]!), rankIndex(m[5]!)].sort((x, y) => x - y);
     if (b! >= hi) throw new Error(`範囲の書き方が違います：${t}`);

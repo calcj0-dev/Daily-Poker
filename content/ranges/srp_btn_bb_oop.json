@@ -10,7 +10,7 @@
     "ja": "BB が BTN に付いていく手"
   },
   "format": "postflop-solver の範囲の書き方（例：AA,AKs,AQo:0.5）",
-  "range": "22-99,A6s-ATs,A2s-A3s,K2s-KJs,Q2s+,J4s+,T6s+,96s+,85s+,74s+,63s+,53s+,43s,A2o-AJo,K7o-KQo,Q8o+,J8o+,T8o+,97o+,87o,76o",
+  "range": "99-22,ATs-A6s,A3s-A2s,KJs-K2s,Q2s+,J4s+,T6s+,96s+,85s+,74s+,63s+,53s+,43s,AJo-A2o,KQo-K7o,Q8o+,J8o+,T8o+,97o+,87o,76o",
   "source": {
     "ja": "Daily Poker 独自（理論上の正解ではない）。他社のレンジ表は使っていない"
   },

@@ -7,8 +7,10 @@ import { expandToken, overlap, parseRange, rangePercent } from '../scripts/lib/r
 describe('レンジの書き方', () => {
   it('ペア・範囲・+ を広げる', () => {
     expect(expandToken('QQ+')).toEqual(['QQ', 'KK', 'AA']);
-    expect(expandToken('22-44')).toEqual(['22', '33', '44']);
-    expect(expandToken('A2s-A4s')).toEqual(['A2s', 'A3s', 'A4s']);
+    expect(expandToken('44-22')).toEqual(['22', '33', '44']);
+    expect(() => expandToken('22-44')).toThrow(/強い方/);
+    expect(expandToken('A4s-A2s')).toEqual(['A2s', 'A3s', 'A4s']);
+    expect(() => expandToken('A2s-A4s')).toThrow(/強い方/);
     expect(expandToken('KTs+')).toEqual(['KTs', 'KJs', 'KQs']);
     expect(expandToken('AK')).toEqual(['AKs', 'AKo']);
   });

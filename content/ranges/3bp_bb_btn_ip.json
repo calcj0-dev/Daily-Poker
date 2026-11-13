@@ -10,7 +10,7 @@
     "ja": "BTN が上げ返しに付いていく手"
   },
   "format": "postflop-solver の範囲の書き方（例：AA,AKs,AQo:0.5）",
-  "range": "22-JJ,A9s-AQs,A5s-A2s,KTs+,QTs+,J9s+,T9s,98s,87s,76s,65s,AQo,AJo,KQo",
+  "range": "JJ-22,AQs-A9s,A5s-A2s,KTs+,QTs+,J9s+,T9s,98s,87s,76s,65s,AQo,AJo,KQo",
   "source": {
     "ja": "Daily Poker 独自（理論上の正解ではない）。他社のレンジ表は使っていない"
   },
