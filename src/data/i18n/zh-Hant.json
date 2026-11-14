@@ -41,7 +41,8 @@
     "listSep": "、",
     "you": "你（{pos}）",
     "table": "6 人桌",
-    "deal": "{street}：{cards}"
+    "deal": "{street}：{cards}",
+    "holecards": "發牌"
   },
   "replay": {
     "prev": "上一步",

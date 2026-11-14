@@ -41,7 +41,8 @@
     "listSep": "・",
     "you": "あなた（{pos}）",
     "table": "6人のテーブル",
-    "deal": "{street}：{cards}"
+    "deal": "{street}：{cards}",
+    "holecards": "カードが配られる"
   },
   "replay": {
     "prev": "戻る",

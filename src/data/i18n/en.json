@@ -41,7 +41,8 @@
     "listSep": ", ",
     "you": "You ({pos})",
     "table": "6-handed table",
-    "deal": "{street}: {cards}"
+    "deal": "{street}: {cards}",
+    "holecards": "Cards are dealt"
   },
   "replay": {
     "prev": "Back",

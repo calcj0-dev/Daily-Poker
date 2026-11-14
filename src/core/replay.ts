@@ -14,6 +14,8 @@ export type SeatAction = { action: HistoryItem['action'] | 'blind'; amountBB?: n
 
 export type ReplayCaption =
   | { kind: 'blinds' }
+  /** 手札を配る */
+  | { kind: 'holecards' }
   | { kind: 'folds'; positions: Position[] }
   | { kind: 'action'; item: HistoryItem }
   /** 相手がいま賭けた額（出題の直前の行動） */
@@ -22,6 +24,8 @@ export type ReplayCaption =
 
 export type ReplayStep = {
   street: 'preflop' | Street;
+  /** 手札を配り終えたか（ブラインドの場面ではまだ） */
+  dealt: boolean;
   /** 見せる場のカードの枚数（0・3・4・5） */
   boardCount: number;
   /** 前の段階までに集まったポット（この段階で賭けている額は含まない） */
@@ -41,6 +45,7 @@ type State = Omit<ReplayStep, 'caption' | 'actors' | 'folded'> & { folded: Set<P
 function snapshot(s: State, caption: ReplayCaption, actors: Position[]): ReplayStep {
   return {
     street: s.street,
+    dealt: s.dealt,
     boardCount: s.boardCount,
     potBB: round(s.potBB),
     bets: { ...s.bets },
@@ -68,7 +73,7 @@ function deal(s: State, street: Street): void {
 export function buildReplay(spot: Pick<Spot, 'history' | 'hero' | 'villain' | 'facing' | 'street'>): ReplayStep[] {
   const posOf: Record<HistoryItem['actor'], Position> = { hero: spot.hero.position, villain: spot.villain.position };
   const stacks = Object.fromEntries(SEATS.map((p) => [p, STACK_BB])) as Record<Position, number>;
-  const s: State = { street: 'preflop', boardCount: 0, potBB: 0, bets: {}, stacks, folded: new Set(), last: {} };
+  const s: State = { street: 'preflop', dealt: false, boardCount: 0, potBB: 0, bets: {}, stacks, folded: new Set(), last: {} };
   const steps: ReplayStep[] = [];
 
   for (const [p, amount] of Object.entries(BLINDS) as [Position, number][]) {
@@ -77,6 +82,8 @@ export function buildReplay(spot: Pick<Spot, 'history' | 'hero' | 'villain' | 'f
     s.last[p] = { action: 'blind', amountBB: amount };
   }
   steps.push(snapshot(s, { kind: 'blinds' }, ['SB', 'BB']));
+  s.dealt = true;
+  steps.push(snapshot(s, { kind: 'holecards' }, []));
 
   const goTo = (street: 'preflop' | Street) => {
     if (street === 'preflop' || street === s.street) return;

@@ -6,11 +6,11 @@ import { lossDisplay, type Grade } from '../../core/grade';
 import { MARK_EMOJI } from '../../core/share';
 import { fullHistory, SEATS } from '../../core/history';
 import { buildReplay, type ReplayStep, type SeatAction } from '../../core/replay';
-import type { HistoryItem, Spot } from '../../core/types';
+import type { HistoryItem, Position, Spot } from '../../core/types';
 import { isMachineTranslated, getLocale, t } from '../../i18n';
 import type { Session } from '../../session';
 import type { Screen } from '../app';
-import { cardParts, cardRow } from '../cards';
+import { cardEl, cardParts } from '../cards';
 import { button, h } from '../dom';
 import { termEl, withTerms } from '../glossaryTip';
 import { footer, settingsButton } from '../parts';
@@ -112,15 +112,46 @@ function seatActionText(a: SeatAction): string {
   return t(`seatActions.${a.action}`, { amount: a.amountBB !== undefined ? chips(a.amountBB) : '' });
 }
 
-function bubble(a: SeatAction | undefined): HTMLElement | null {
-  if (!a) return null;
-  return h('span', { className: `seat-bubble act-${a.action}`, text: seatActionText(a) });
+function sameAction(x: SeatAction | undefined, y: SeatAction | undefined): boolean {
+  return x?.action === y?.action && x?.amountBB === y?.amountBB;
+}
+
+function bubble(a: SeatAction | undefined, pop: boolean): HTMLElement | null {
+  // ブラインドは席の前のチップで見せるので、吹き出しは出さない
+  if (!a || a.action === 'blind') return null;
+  return h('span', { className: `seat-bubble act-${a.action}${pop ? ' pop' : ''}`, text: seatActionText(a) });
+}
+
+/** 配る順（SB から時計回り。2枚目はもう1周） */
+const DEAL_ORDER: Position[] = ['SB', 'BB', 'UTG', 'HJ', 'CO', 'BTN'];
+const DEAL_GAP_MS = 90;
+
+/** 伏せたカード2枚。配る・降りるときは動かす */
+function cardBacks(pos: Position, anim: 'deal' | 'fold' | null): HTMLElement {
+  const order = DEAL_ORDER.indexOf(pos);
+  return h(
+    'span',
+    { className: 'backs' },
+    [0, 1].map((k) =>
+      h('span', {
+        className: `back${anim === 'deal' ? ' deal-in' : anim === 'fold' ? ' fold-out' : ''}`,
+        attrs: anim === 'deal' ? { style: `animation-delay:${(order + k * DEAL_ORDER.length) * DEAL_GAP_MS}ms` } : {},
+      }),
+    ),
+  );
+}
+
+/** 席の前に出す賭けたチップ。新しく賭けたら動かす。段階が変わったらポットへ集める */
+function betChip(amount: number | undefined, anim: 'in' | 'collect' | null): HTMLElement | null {
+  if (!amount) return null;
+  return h('span', { className: `bet-chip${anim === 'in' ? ' chip-in' : anim === 'collect' ? ' collect' : ''}`, text: chips(amount) });
 }
 
 /** 再生の場面の説明（テーブルの下に出す1行） */
 function captionText(spot: Spot, step: ReplayStep): string {
   const c = step.caption;
   if (c.kind === 'blinds') return t('historyActions.blinds', { sb: chips(0.5), bb: chips(1) });
+  if (c.kind === 'holecards') return t('spot.holecards');
   if (c.kind === 'folds') return t('historyActions.folds', { who: c.positions.join(t('spot.listSep')) });
   if (c.kind === 'deal') return t('spot.deal', { street: t(`streets.${c.street}`), cards: spot.board.slice(0, step.boardCount).map(cardText).join(' ') });
   if (c.kind === 'facing') return t('spot.facing', { amount: chips(c.amountBB) });
@@ -140,40 +171,97 @@ function totalPot(step: ReplayStep): number {
   return step.potBB + Object.values(step.bets).reduce<number>((a, v) => a + (v ?? 0), 0);
 }
 
-function tableBlock(spot: Spot, step: ReplayStep): HTMLElement {
+/**
+ * テーブル。prev（ひとつ前の場面）を渡すと、変わったところだけを動かす（再生で1手進めたとき）。
+ * 動き：手札を配る／チップを出す／吹き出し／降りたカードを真ん中へ／段階が変わるとチップをポットへ集め、場のカードをめくる
+ */
+function tableBlock(spot: Spot, step: ReplayStep, prev?: ReplayStep): HTMLElement {
   const folded = new Set(step.folded);
+  const wasFolded = new Set(prev?.folded ?? step.folded);
   const actors = new Set(step.actors);
   const heroAt = SEATS.indexOf(spot.hero.position);
+  const dealingNow = !!prev && !prev.dealt && step.dealt;
+  const newStreet = !!prev && prev.street !== step.street;
+
+  const seatAnim = (pos: Position) => {
+    if (dealingNow) return { backs: 'deal' as const };
+    if (prev && folded.has(pos) && !wasFolded.has(pos)) return { backs: 'fold' as const };
+    return { backs: null };
+  };
+  const chipFor = (pos: Position) => {
+    if (newStreet) return betChip(prev?.bets[pos], prev?.bets[pos] ? 'collect' : null);
+    const changed = !!prev && (prev.bets[pos] ?? 0) !== (step.bets[pos] ?? 0);
+    return betChip(step.bets[pos], changed ? 'in' : null);
+  };
 
   const others = SLOTS.map(([x, y], k) => {
     const pos = SEATS[(heroAt + k + 1) % SEATS.length]!;
     const isVillain = pos === spot.villain.position;
+    const anim = seatAnim(pos);
+    const showBacks = step.dealt && (!folded.has(pos) || anim.backs === 'fold');
     const cls = ['seat6', folded.has(pos) ? 'folded' : '', isVillain ? 'villain' : '', actors.has(pos) ? 'acting' : ''].filter(Boolean).join(' ');
-    return h('div', { className: cls, attrs: { style: `left:${x}%;top:${y}%` } }, [
+    // 動きの向き：席からテーブルの真ん中へ（px のおおよそ）
+    const style = `left:${x}%;top:${y}%;--dx:${Math.round((50 - x) * 3.3)}px;--dy:${Math.round((54 - y) * 2.2)}px`;
+    const last = step.last[pos] ?? (folded.has(pos) ? { action: 'fold' as const } : undefined);
+    return h('div', { className: cls, attrs: { style } }, [
       h('span', { className: 'seat6-pos' }, [pos, pos === 'BTN' ? h('span', { className: 'dealer', text: 'D' }) : null]),
       isVillain ? h('span', { className: 'seat6-sub', text: t('spot.villain') }) : null,
       folded.has(pos) ? null : h('span', { className: 'seat6-sub', text: chips(step.stacks[pos]) }),
-      bubble(step.last[pos] ?? (folded.has(pos) ? { action: 'fold' } : undefined)),
+      showBacks ? cardBacks(pos, anim.backs) : null,
+      bubble(last, !!prev && !sameAction(prev.last[pos], step.last[pos]) && !!step.last[pos]),
+      chipFor(pos),
     ]);
   });
+
+  const potChanged = !!prev && totalPot(prev) !== totalPot(step);
+  const board = step.boardCount
+    ? h(
+        'span',
+        { className: 'cards' },
+        spot.board.slice(0, step.boardCount).map((card, i) => {
+          const el = cardEl(card);
+          if (prev && i >= prev.boardCount) {
+            el.classList.add('flip-in');
+            el.style.animationDelay = `${(i - prev.boardCount) * 180 + (newStreet ? 350 : 0)}ms`;
+          }
+          return el;
+        }),
+      )
+    : h('span', { className: 'board-empty' });
 
   const felt = h('div', { className: 'felt' }, [
     h('div', { className: 'felt-center' }, [
       h('span', { className: 'street', text: step.street === 'preflop' ? '' : t(`streets.${step.street}`) }),
-      step.boardCount ? cardRow(spot.board.slice(0, step.boardCount)) : h('span', { className: 'board-empty' }),
-      h('span', { className: 'pot' }, [termEl('pot', t('spot.pot', { pot: chips(totalPot(step)) }))]),
+      board,
+      h('span', { className: `pot${potChanged ? ' pulse' : ''}` }, [termEl('pot', t('spot.pot', { pot: chips(totalPot(step)) }))]),
     ]),
     ...others,
   ]);
 
   const heroPos = spot.hero.position;
-  const hero = h('div', { className: `hero-seat${actors.has(heroPos) ? ' acting' : ''}` }, [
+  // あなたの手札：配るまでは空き、配るときに動かす
+  const heroCards = step.dealt
+    ? h(
+        'span',
+        { className: 'cards' },
+        spot.hero.cards.map((card, k) => {
+          const el = cardEl(card, 'lg');
+          if (dealingNow) {
+            el.classList.add('deal-in');
+            el.style.animationDelay = `${(DEAL_ORDER.indexOf(heroPos) + k * DEAL_ORDER.length) * DEAL_GAP_MS}ms`;
+          }
+          return el;
+        }),
+      )
+    : h('span', { className: 'cards hero-empty' });
+  const hero = h('div', { className: `hero-seat${actors.has(heroPos) ? ' acting' : ''}`, attrs: { style: '--dx:0px;--dy:-150px' } }, [
     h('div', { className: 'seat-name' }, [
       h('strong', { text: t('spot.hero') }),
       h('span', { className: 'seat-pos' }, [heroPos, heroPos === 'BTN' ? h('span', { className: 'dealer', text: 'D' }) : null]),
-      bubble(step.last[heroPos]),
+      bubble(step.last[heroPos], !!prev && !sameAction(prev.last[heroPos], step.last[heroPos]) && !!step.last[heroPos]),
+      chipFor(heroPos),
     ]),
-    cardRow(spot.hero.cards, 'lg'),
+    heroCards,
     h('span', { className: 'muted small', text: t('spot.stack', { stack: chips(step.stacks[heroPos]) }) }),
   ]);
 
@@ -207,8 +295,12 @@ function revealBlock(spot: Spot, chosen: string, g: Grade, isLast: boolean, onNe
   ]);
 }
 
-/** 再生で1手を見せる時間（ミリ秒） */
-const STEP_MS = 1100;
+/** 再生で1つの場面を見せる時間（ミリ秒）。配る場面は動きが長いので長めに */
+function stepMs(step: ReplayStep | undefined): number {
+  if (step?.caption.kind === 'holecards') return 1900;
+  if (step?.caption.kind === 'deal') return 1600;
+  return 1200;
+}
 
 export function spotScreen(props: SpotProps): Screen {
   const { session } = props;
@@ -219,6 +311,8 @@ export function spotScreen(props: SpotProps): Screen {
   // 再生：問題の前に、テーブルの上で1手ずつ見せる
   let steps: ReplayStep[] = buildReplay(session.spot(index));
   let step = 0;
+  /** 動きを付けるときの、ひとつ前の場面（1手進めたときだけ。戻る・飛ばすときは動かさない） */
+  let animPrev: ReplayStep | undefined;
   let replaying = true;
   let timer: ReturnType<typeof setTimeout> | undefined;
 
@@ -233,6 +327,7 @@ export function spotScreen(props: SpotProps): Screen {
     stopAuto();
     steps = buildReplay(session.spot(index));
     step = 0;
+    animPrev = undefined;
     replaying = true;
     redraw();
     auto();
@@ -242,17 +337,19 @@ export function spotScreen(props: SpotProps): Screen {
     stopAuto();
     timer = setTimeout(() => {
       if (step < steps.length - 1) {
+        animPrev = steps[step];
         step++;
         redraw();
         auto();
       } else {
         finishReplay();
       }
-    }, STEP_MS);
+    }, stepMs(steps[step]));
   }
 
   function finishReplay(): void {
     stopAuto();
+    animPrev = undefined;
     step = steps.length - 1;
     replaying = false;
     redraw();
@@ -260,7 +357,9 @@ export function spotScreen(props: SpotProps): Screen {
 
   function go(delta: number): void {
     stopAuto();
-    step = Math.max(0, Math.min(steps.length - 1, step + delta));
+    const nextStep = Math.max(0, Math.min(steps.length - 1, step + delta));
+    animPrev = nextStep === step + 1 ? steps[step] : undefined;
+    step = nextStep;
     redraw();
   }
 
@@ -320,7 +419,7 @@ export function spotScreen(props: SpotProps): Screen {
     ]);
     const cur = steps[step] ?? steps[steps.length - 1]!;
 
-    if (replaying) return [header, tableBlock(spot, cur), replayControls(spot)];
+    if (replaying) return [header, tableBlock(spot, cur, animPrev), replayControls(spot)];
 
     const options = h(
       'div',

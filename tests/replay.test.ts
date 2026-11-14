@@ -17,6 +17,7 @@ function captions(spot: Spot): string[] {
     if (c.kind === 'action') return `${c.item.actor} ${c.item.action}`;
     if (c.kind === 'deal') return `deal ${c.street}`;
     if (c.kind === 'facing') return `facing ${c.amountBB}`;
+    if (c.kind === 'holecards') return 'holecards';
     return 'blinds';
   });
 }
@@ -26,6 +27,7 @@ describe('ハンドの再生', () => {
     const spot = fx.spots[2]!;
     expect(captions(spot)).toEqual([
       'blinds',
+      'holecards',
       'fold UTG,HJ,CO',
       'villain raise',
       'fold SB',
