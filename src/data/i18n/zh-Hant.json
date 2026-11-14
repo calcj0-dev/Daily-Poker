@@ -36,7 +36,11 @@
     "stack": "剩餘 {stack}BB",
     "facing": "對手下注 {amount}BB",
     "yourTurn": "輪到你行動",
-    "history": "目前為止的行動"
+    "history": "目前為止的行動",
+    "folded": "棄牌",
+    "listSep": "、",
+    "you": "你（{pos}）",
+    "table": "6 人桌"
   },
   "actionLabels": {
     "check": "過牌",
@@ -65,7 +69,8 @@
     "call": "{who}跟注",
     "check": "{who}過牌",
     "bet": "{who}下注 {amount}BB",
-    "fold": "{who}棄牌"
+    "fold": "{who}棄牌",
+    "folds": "{who}棄牌"
   },
   "reveal": {
     "green": "與 GTO 一致",

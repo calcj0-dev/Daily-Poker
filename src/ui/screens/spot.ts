@@ -4,6 +4,7 @@ import { config } from '../../data';
 import { monthDay } from '../../core/date';
 import { lossDisplay, type Grade } from '../../core/grade';
 import { MARK_EMOJI } from '../../core/share';
+import { foldedSeats, fullHistory, SEATS } from '../../core/history';
 import type { HistoryItem, Spot } from '../../core/types';
 import { isMachineTranslated, getLocale, t } from '../../i18n';
 import type { Session } from '../../session';
@@ -33,22 +34,26 @@ function actionLabel(spot: Spot, id: string): string {
 }
 
 function who(spot: Spot, actor: HistoryItem['actor']): string {
-  return actor === 'hero' ? t('spot.hero') : spot.villain.position;
+  return actor === 'hero' ? t('spot.you', { pos: spot.hero.position }) : spot.villain.position;
 }
 
-/** 「ここまでの流れ」を開いているか（答えた後に描き直しても閉じないように） */
-let historyOpen = false;
+/** 「ここまでの流れ」を開いているか（最初は開いておく。答えた後に描き直しても状態を保つ） */
+let historyOpen = true;
 
 function historyBlock(spot: Spot): HTMLElement {
   const groups: { street: string; lines: string[] }[] = [];
-  for (const item of spot.history) {
-    const line = t(`historyActions.${item.action}`, {
-      who: who(spot, item.actor),
-      amount: item.amountBB !== undefined ? bb(item.amountBB) : '',
-    });
+  for (const e of fullHistory(spot)) {
+    const street = e.kind === 'folds' ? e.street : e.item.street;
+    const line =
+      e.kind === 'folds'
+        ? t('historyActions.folds', { who: e.positions.join(t('spot.listSep')) })
+        : t(`historyActions.${e.item.action}`, {
+            who: who(spot, e.item.actor),
+            amount: e.item.amountBB !== undefined ? bb(e.item.amountBB) : '',
+          });
     const last = groups[groups.length - 1];
-    if (last && last.street === item.street) last.lines.push(line);
-    else groups.push({ street: item.street, lines: [line] });
+    if (last && last.street === street) last.lines.push(line);
+    else groups.push({ street, lines: [line] });
   }
   const details = h('details', { className: 'history' }, [
     h('summary', { text: t('spot.history') }),
@@ -68,24 +73,65 @@ function historyBlock(spot: Spot): HTMLElement {
   return details;
 }
 
-function seat(label: string, position: string, stack: number, cards?: string[]): HTMLElement {
-  return h('div', { className: 'seat' }, [
-    h('div', { className: 'seat-name' }, [h('strong', { text: label }), h('span', { className: 'seat-pos', text: position })]),
-    cards ? cardRow(cards, 'lg') : null,
-    h('span', { className: 'muted small', text: t('spot.stack', { stack: bb(stack) }) }),
-  ]);
-}
+/**
+ * テーブルの席の場所（あなたを一番下に置き、時計回り）。値は % の [横, 縦]。
+ * 一番下（あなた）はテーブルの外に手札と一緒に出すので、ここには5席分
+ */
+const SLOTS: [number, number][] = [
+  [9, 80],
+  [9, 22],
+  [50, 4],
+  [91, 22],
+  [91, 80],
+];
 
 function tableBlock(spot: Spot): HTMLElement {
   const facing = spot.facing?.amountBB ?? 0;
   // 2人とも 100BB から始まるので、残りは同じ。相手が今ベットしていれば、その分だけ少ない
   const villainStack = spot.effectiveStackBB - facing;
-  const pot = h('span', { className: 'pot' }, [termEl('pot', t('spot.pot', { pot: bb(spot.potBB) }))]);
-  return h('div', { className: 'table' }, [
-    seat(t('spot.villain'), spot.villain.position, villainStack),
+  const folded = new Set(foldedSeats(spot));
+  const heroAt = SEATS.indexOf(spot.hero.position);
+
+  const others = SLOTS.map(([x, y], k) => {
+    const pos = SEATS[(heroAt + k + 1) % SEATS.length]!;
+    const isVillain = pos === spot.villain.position;
+    return h(
+      'div',
+      {
+        className: `seat6${folded.has(pos) ? ' folded' : ''}${isVillain ? ' villain' : ''}`,
+        attrs: { style: `left:${x}%;top:${y}%` },
+      },
+      [
+        h('span', { className: 'seat6-pos' }, [pos, pos === 'BTN' ? h('span', { className: 'dealer', text: 'D' }) : null]),
+        h('span', { className: 'seat6-sub', text: isVillain ? t('spot.villain') : t('spot.folded') }),
+        isVillain ? h('span', { className: 'seat6-sub', text: `${bb(villainStack)}BB` }) : null,
+        isVillain && spot.facing ? h('span', { className: 'seat6-bet', text: `${bb(spot.facing.amountBB)}BB` }) : null,
+      ],
+    );
+  });
+
+  const felt = h('div', { className: 'felt' }, [
+    h('div', { className: 'felt-center' }, [
+      h('span', { className: 'street', text: t(`streets.${spot.street}`) }),
+      cardRow(spot.board),
+      h('span', { className: 'pot' }, [termEl('pot', t('spot.pot', { pot: bb(spot.potBB) }))]),
+    ]),
+    ...others,
+  ]);
+
+  const hero = h('div', { className: 'hero-seat' }, [
+    h('div', { className: 'seat-name' }, [
+      h('strong', { text: t('spot.hero') }),
+      h('span', { className: 'seat-pos' }, [spot.hero.position, spot.hero.position === 'BTN' ? h('span', { className: 'dealer', text: 'D' }) : null]),
+    ]),
+    cardRow(spot.hero.cards, 'lg'),
+    h('span', { className: 'muted small', text: t('spot.stack', { stack: bb(spot.effectiveStackBB) }) }),
+  ]);
+
+  return h('div', { className: 'table', attrs: { 'aria-label': t('spot.table') } }, [
+    felt,
     spot.facing ? h('p', { className: 'facing', text: t('spot.facing', { amount: bb(spot.facing.amountBB) }) }) : null,
-    h('div', { className: 'board' }, [h('span', { className: 'street', text: t(`streets.${spot.street}`) }), cardRow(spot.board), pot]),
-    seat(t('spot.hero'), spot.hero.position, spot.effectiveStackBB, spot.hero.cards),
+    hero,
   ]);
 }
 

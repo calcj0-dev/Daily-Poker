@@ -36,7 +36,11 @@
     "stack": "残り {stack}BB",
     "facing": "相手が {amount}BB をベット",
     "yourTurn": "あなたの番です",
-    "history": "ここまでの流れ"
+    "history": "ここまでの流れ",
+    "folded": "フォールド",
+    "listSep": "・",
+    "you": "あなた（{pos}）",
+    "table": "6人のテーブル"
   },
   "actionLabels": {
     "check": "チェック",
@@ -65,7 +69,8 @@
     "call": "{who}がコール",
     "check": "{who}がチェック",
     "bet": "{who}が {amount}BB をベット",
-    "fold": "{who}がフォールド"
+    "fold": "{who}がフォールド",
+    "folds": "{who}がフォールド"
   },
   "reveal": {
     "green": "GTO どおり",

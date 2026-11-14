@@ -36,7 +36,11 @@
     "stack": "Stack {stack}BB",
     "facing": "Opponent bets {amount}BB",
     "yourTurn": "Your action",
-    "history": "Action so far"
+    "history": "Action so far",
+    "folded": "Folded",
+    "listSep": ", ",
+    "you": "You ({pos})",
+    "table": "6-handed table"
   },
   "actionLabels": {
     "check": "Check",
@@ -65,7 +69,8 @@
     "call": "{who} calls",
     "check": "{who} checks",
     "bet": "{who} bets {amount}BB",
-    "fold": "{who} folds"
+    "fold": "{who} folds",
+    "folds": "{who} fold"
   },
   "reveal": {
     "green": "GTO move",
