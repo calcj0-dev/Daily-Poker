@@ -1,0 +1,14 @@
+{
+  "note": "1日目の候補（9案）。計算してから5問を選ぶ",
+  "spots": [
+    { "type": "srp_btn_bb", "hero": "BTN", "cards": ["Ac", "5d"], "board": ["Ts", "9h", "4c"], "flop": ["villain check"], "tags": ["bluff", "betsize"] },
+    { "type": "srp_btn_bb", "hero": "BB", "cards": ["Jh", "Th"], "board": ["Qd", "8c", "3s"], "flop": ["hero check", "villain bet 33"], "tags": ["bluffcatch"] },
+    { "type": "srp_co_bb", "hero": "CO", "cards": ["Qh", "Qc"], "board": ["Ah", "7c", "2d", "Ks"], "flop": ["villain check", "hero bet 33", "villain call"], "turn": ["villain check"], "tags": ["check"] },
+    { "type": "srp_sb_bb", "hero": "SB", "cards": ["9c", "8c"], "board": ["Kh", "Kd", "6s"], "tags": ["bluff", "betsize"] },
+    { "type": "3bp_bb_btn", "hero": "BTN", "cards": ["Th", "Tc"], "board": ["Ac", "9d", "5h"], "flop": ["villain bet 33"], "tags": ["3betpot", "bluffcatch"] },
+    { "type": "srp_btn_bb", "hero": "BB", "cards": ["Js", "4s"], "board": ["Jd", "7s", "2c", "9h", "3d"], "flop": ["hero check", "villain bet 33", "hero call"], "turn": ["hero check", "villain bet 67", "hero call"], "river": ["hero check", "villain bet 67"], "tags": ["bluffcatch"] },
+    { "type": "srp_btn_bb", "hero": "BTN", "cards": ["Kd", "Th"], "board": ["Kc", "8d", "4h", "2s", "7c"], "flop": ["villain check", "hero bet 33", "villain call"], "turn": ["villain check", "hero check"], "river": ["villain check"], "tags": ["value", "betsize"] },
+    { "type": "srp_co_bb", "hero": "BB", "cards": ["8h", "7h"], "board": ["Th", "6h", "3c", "Qs"], "flop": ["hero check", "villain bet 33", "hero call"], "turn": ["hero check", "villain bet 67"], "tags": ["bluff"] },
+    { "type": "srp_sb_bb", "hero": "BB", "cards": ["Ah", "Th"], "board": ["9s", "8s", "2d", "Jc", "4h"], "flop": ["villain check", "hero check"], "turn": ["villain check", "hero bet 67", "villain call"], "river": ["villain check"], "tags": ["bluff"] }
+  ]
+}

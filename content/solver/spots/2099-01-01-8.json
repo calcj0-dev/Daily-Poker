@@ -1,0 +1,70 @@
+{
+  "id": "2099-01-01-8",
+  "situation": "srp_co_bb",
+  "oopRange": "ranges/srp_co_bb_oop.json",
+  "ipRange": "ranges/srp_co_bb_ip.json",
+  "startingPotBB": 5.5,
+  "effectiveStackBB": 97.5,
+  "board": [
+    "Th",
+    "6h",
+    "3c",
+    "Qs"
+  ],
+  "startStreet": "flop",
+  "betSizes": {
+    "flop": {
+      "oop": {
+        "bet": "67%",
+        "raise": "3x"
+      },
+      "ip": {
+        "bet": "33%",
+        "raise": "3x"
+      }
+    },
+    "turn": {
+      "oop": {
+        "bet": "",
+        "raise": "3x"
+      },
+      "ip": {
+        "bet": "67%",
+        "raise": "3x"
+      }
+    },
+    "river": {
+      "oop": {
+        "bet": "67%",
+        "raise": "a"
+      },
+      "ip": {
+        "bet": "67%",
+        "raise": "a"
+      }
+    }
+  },
+  "hero": {
+    "player": "oop",
+    "cards": [
+      "8h",
+      "7h"
+    ]
+  },
+  "decisionPath": [
+    "Check",
+    "Bet(1.8)",
+    "Call",
+    "Check",
+    "Bet(6.1)"
+  ],
+  "accuracy": {
+    "targetExploitabilityPctPot": 0.3,
+    "maxIterations": 1000
+  },
+  "options": [
+    "fold",
+    "call",
+    "raise"
+  ]
+}

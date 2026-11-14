@@ -1,0 +1,788 @@
+{
+  "date": "2099-01-01",
+  "number": 1,
+  "spots": [
+    {
+      "id": "2099-01-01-1",
+      "index": 1,
+      "tags": [
+        "flop",
+        "bluff",
+        "betsize"
+      ],
+      "spotType": "srp_btn_bb",
+      "hero": {
+        "position": "BTN",
+        "cards": [
+          "Ac",
+          "5d"
+        ]
+      },
+      "villain": {
+        "position": "BB"
+      },
+      "board": [
+        "Ts",
+        "9h",
+        "4c"
+      ],
+      "street": "flop",
+      "potBB": 5.5,
+      "effectiveStackBB": 97.5,
+      "history": [
+        {
+          "street": "preflop",
+          "actor": "hero",
+          "action": "raise",
+          "amountBB": 2.5
+        },
+        {
+          "street": "preflop",
+          "actor": "villain",
+          "action": "call"
+        },
+        {
+          "street": "flop",
+          "actor": "villain",
+          "action": "check"
+        }
+      ],
+      "facing": null,
+      "options": [
+        {
+          "id": "check",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "bet33",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "bet67",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "allin",
+          "freq": 0,
+          "evBB": 0
+        }
+      ],
+      "explanation": {
+        "ja": "",
+        "en": "",
+        "zh-Hant": ""
+      },
+      "terms": []
+    },
+    {
+      "id": "2099-01-01-2",
+      "index": 2,
+      "tags": [
+        "flop",
+        "bluffcatch"
+      ],
+      "spotType": "srp_btn_bb",
+      "hero": {
+        "position": "BB",
+        "cards": [
+          "Jh",
+          "Th"
+        ]
+      },
+      "villain": {
+        "position": "BTN"
+      },
+      "board": [
+        "Qd",
+        "8c",
+        "3s"
+      ],
+      "street": "flop",
+      "potBB": 5.5,
+      "effectiveStackBB": 97.5,
+      "history": [
+        {
+          "street": "preflop",
+          "actor": "villain",
+          "action": "raise",
+          "amountBB": 2.5
+        },
+        {
+          "street": "preflop",
+          "actor": "hero",
+          "action": "call"
+        },
+        {
+          "street": "flop",
+          "actor": "hero",
+          "action": "check"
+        }
+      ],
+      "facing": {
+        "action": "bet",
+        "amountBB": 1.8
+      },
+      "options": [
+        {
+          "id": "fold",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "call",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "raise",
+          "freq": 0,
+          "evBB": 0
+        }
+      ],
+      "explanation": {
+        "ja": "",
+        "en": "",
+        "zh-Hant": ""
+      },
+      "terms": []
+    },
+    {
+      "id": "2099-01-01-3",
+      "index": 3,
+      "tags": [
+        "turn",
+        "check"
+      ],
+      "spotType": "srp_co_bb",
+      "hero": {
+        "position": "CO",
+        "cards": [
+          "Qh",
+          "Qc"
+        ]
+      },
+      "villain": {
+        "position": "BB"
+      },
+      "board": [
+        "Ah",
+        "7c",
+        "2d",
+        "Ks"
+      ],
+      "street": "turn",
+      "potBB": 9.1,
+      "effectiveStackBB": 95.7,
+      "history": [
+        {
+          "street": "preflop",
+          "actor": "hero",
+          "action": "raise",
+          "amountBB": 2.5
+        },
+        {
+          "street": "preflop",
+          "actor": "villain",
+          "action": "call"
+        },
+        {
+          "street": "flop",
+          "actor": "villain",
+          "action": "check"
+        },
+        {
+          "street": "flop",
+          "actor": "hero",
+          "action": "bet",
+          "amountBB": 1.8
+        },
+        {
+          "street": "flop",
+          "actor": "villain",
+          "action": "call"
+        },
+        {
+          "street": "turn",
+          "actor": "villain",
+          "action": "check"
+        }
+      ],
+      "facing": null,
+      "options": [
+        {
+          "id": "check",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "bet33",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "bet67",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "allin",
+          "freq": 0,
+          "evBB": 0
+        }
+      ],
+      "explanation": {
+        "ja": "",
+        "en": "",
+        "zh-Hant": ""
+      },
+      "terms": []
+    },
+    {
+      "id": "2099-01-01-4",
+      "index": 4,
+      "tags": [
+        "flop",
+        "bluff",
+        "betsize"
+      ],
+      "spotType": "srp_sb_bb",
+      "hero": {
+        "position": "SB",
+        "cards": [
+          "9c",
+          "8c"
+        ]
+      },
+      "villain": {
+        "position": "BB"
+      },
+      "board": [
+        "Kh",
+        "Kd",
+        "6s"
+      ],
+      "street": "flop",
+      "potBB": 5,
+      "effectiveStackBB": 97.5,
+      "history": [
+        {
+          "street": "preflop",
+          "actor": "hero",
+          "action": "raise",
+          "amountBB": 2.5
+        },
+        {
+          "street": "preflop",
+          "actor": "villain",
+          "action": "call"
+        }
+      ],
+      "facing": null,
+      "options": [
+        {
+          "id": "check",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "bet33",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "bet67",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "allin",
+          "freq": 0,
+          "evBB": 0
+        }
+      ],
+      "explanation": {
+        "ja": "",
+        "en": "",
+        "zh-Hant": ""
+      },
+      "terms": []
+    },
+    {
+      "id": "2099-01-01-5",
+      "index": 5,
+      "tags": [
+        "flop",
+        "3betpot",
+        "bluffcatch"
+      ],
+      "spotType": "3bp_bb_btn",
+      "hero": {
+        "position": "BTN",
+        "cards": [
+          "Th",
+          "Tc"
+        ]
+      },
+      "villain": {
+        "position": "BB"
+      },
+      "board": [
+        "Ac",
+        "9d",
+        "5h"
+      ],
+      "street": "flop",
+      "potBB": 21.5,
+      "effectiveStackBB": 89.5,
+      "history": [
+        {
+          "street": "preflop",
+          "actor": "hero",
+          "action": "raise",
+          "amountBB": 2.5
+        },
+        {
+          "street": "preflop",
+          "actor": "villain",
+          "action": "raise",
+          "amountBB": 10.5
+        },
+        {
+          "street": "preflop",
+          "actor": "hero",
+          "action": "call"
+        }
+      ],
+      "facing": {
+        "action": "bet",
+        "amountBB": 7.1
+      },
+      "options": [
+        {
+          "id": "fold",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "call",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "raise",
+          "freq": 0,
+          "evBB": 0
+        }
+      ],
+      "explanation": {
+        "ja": "",
+        "en": "",
+        "zh-Hant": ""
+      },
+      "terms": []
+    },
+    {
+      "id": "2099-01-01-6",
+      "index": 6,
+      "tags": [
+        "river",
+        "bluffcatch"
+      ],
+      "spotType": "srp_btn_bb",
+      "hero": {
+        "position": "BB",
+        "cards": [
+          "Js",
+          "4s"
+        ]
+      },
+      "villain": {
+        "position": "BTN"
+      },
+      "board": [
+        "Jd",
+        "7s",
+        "2c",
+        "9h",
+        "3d"
+      ],
+      "street": "river",
+      "potBB": 21.3,
+      "effectiveStackBB": 89.6,
+      "history": [
+        {
+          "street": "preflop",
+          "actor": "villain",
+          "action": "raise",
+          "amountBB": 2.5
+        },
+        {
+          "street": "preflop",
+          "actor": "hero",
+          "action": "call"
+        },
+        {
+          "street": "flop",
+          "actor": "hero",
+          "action": "check"
+        },
+        {
+          "street": "flop",
+          "actor": "villain",
+          "action": "bet",
+          "amountBB": 1.8
+        },
+        {
+          "street": "flop",
+          "actor": "hero",
+          "action": "call"
+        },
+        {
+          "street": "turn",
+          "actor": "hero",
+          "action": "check"
+        },
+        {
+          "street": "turn",
+          "actor": "villain",
+          "action": "bet",
+          "amountBB": 6.1
+        },
+        {
+          "street": "turn",
+          "actor": "hero",
+          "action": "call"
+        },
+        {
+          "street": "river",
+          "actor": "hero",
+          "action": "check"
+        }
+      ],
+      "facing": {
+        "action": "bet",
+        "amountBB": 14.3
+      },
+      "options": [
+        {
+          "id": "fold",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "call",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "raise",
+          "freq": 0,
+          "evBB": 0
+        }
+      ],
+      "explanation": {
+        "ja": "",
+        "en": "",
+        "zh-Hant": ""
+      },
+      "terms": []
+    },
+    {
+      "id": "2099-01-01-7",
+      "index": 7,
+      "tags": [
+        "river",
+        "value",
+        "betsize"
+      ],
+      "spotType": "srp_btn_bb",
+      "hero": {
+        "position": "BTN",
+        "cards": [
+          "Kd",
+          "Th"
+        ]
+      },
+      "villain": {
+        "position": "BB"
+      },
+      "board": [
+        "Kc",
+        "8d",
+        "4h",
+        "2s",
+        "7c"
+      ],
+      "street": "river",
+      "potBB": 9.1,
+      "effectiveStackBB": 95.7,
+      "history": [
+        {
+          "street": "preflop",
+          "actor": "hero",
+          "action": "raise",
+          "amountBB": 2.5
+        },
+        {
+          "street": "preflop",
+          "actor": "villain",
+          "action": "call"
+        },
+        {
+          "street": "flop",
+          "actor": "villain",
+          "action": "check"
+        },
+        {
+          "street": "flop",
+          "actor": "hero",
+          "action": "bet",
+          "amountBB": 1.8
+        },
+        {
+          "street": "flop",
+          "actor": "villain",
+          "action": "call"
+        },
+        {
+          "street": "turn",
+          "actor": "villain",
+          "action": "check"
+        },
+        {
+          "street": "turn",
+          "actor": "hero",
+          "action": "check"
+        },
+        {
+          "street": "river",
+          "actor": "villain",
+          "action": "check"
+        }
+      ],
+      "facing": null,
+      "options": [
+        {
+          "id": "check",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "bet33",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "bet67",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "allin",
+          "freq": 0,
+          "evBB": 0
+        }
+      ],
+      "explanation": {
+        "ja": "",
+        "en": "",
+        "zh-Hant": ""
+      },
+      "terms": []
+    },
+    {
+      "id": "2099-01-01-8",
+      "index": 8,
+      "tags": [
+        "turn",
+        "bluff"
+      ],
+      "spotType": "srp_co_bb",
+      "hero": {
+        "position": "BB",
+        "cards": [
+          "8h",
+          "7h"
+        ]
+      },
+      "villain": {
+        "position": "CO"
+      },
+      "board": [
+        "Th",
+        "6h",
+        "3c",
+        "Qs"
+      ],
+      "street": "turn",
+      "potBB": 9.1,
+      "effectiveStackBB": 95.7,
+      "history": [
+        {
+          "street": "preflop",
+          "actor": "villain",
+          "action": "raise",
+          "amountBB": 2.5
+        },
+        {
+          "street": "preflop",
+          "actor": "hero",
+          "action": "call"
+        },
+        {
+          "street": "flop",
+          "actor": "hero",
+          "action": "check"
+        },
+        {
+          "street": "flop",
+          "actor": "villain",
+          "action": "bet",
+          "amountBB": 1.8
+        },
+        {
+          "street": "flop",
+          "actor": "hero",
+          "action": "call"
+        },
+        {
+          "street": "turn",
+          "actor": "hero",
+          "action": "check"
+        }
+      ],
+      "facing": {
+        "action": "bet",
+        "amountBB": 6.1
+      },
+      "options": [
+        {
+          "id": "fold",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "call",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "raise",
+          "freq": 0,
+          "evBB": 0
+        }
+      ],
+      "explanation": {
+        "ja": "",
+        "en": "",
+        "zh-Hant": ""
+      },
+      "terms": []
+    },
+    {
+      "id": "2099-01-01-9",
+      "index": 9,
+      "tags": [
+        "river",
+        "bluff"
+      ],
+      "spotType": "srp_sb_bb",
+      "hero": {
+        "position": "BB",
+        "cards": [
+          "Ah",
+          "Th"
+        ]
+      },
+      "villain": {
+        "position": "SB"
+      },
+      "board": [
+        "9s",
+        "8s",
+        "2d",
+        "Jc",
+        "4h"
+      ],
+      "street": "river",
+      "potBB": 11.8,
+      "effectiveStackBB": 94.1,
+      "history": [
+        {
+          "street": "preflop",
+          "actor": "villain",
+          "action": "raise",
+          "amountBB": 2.5
+        },
+        {
+          "street": "preflop",
+          "actor": "hero",
+          "action": "call"
+        },
+        {
+          "street": "flop",
+          "actor": "villain",
+          "action": "check"
+        },
+        {
+          "street": "flop",
+          "actor": "hero",
+          "action": "check"
+        },
+        {
+          "street": "turn",
+          "actor": "villain",
+          "action": "check"
+        },
+        {
+          "street": "turn",
+          "actor": "hero",
+          "action": "bet",
+          "amountBB": 3.4
+        },
+        {
+          "street": "turn",
+          "actor": "villain",
+          "action": "call"
+        },
+        {
+          "street": "river",
+          "actor": "villain",
+          "action": "check"
+        }
+      ],
+      "facing": null,
+      "options": [
+        {
+          "id": "check",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "bet33",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "bet67",
+          "freq": 0,
+          "evBB": 0
+        },
+        {
+          "id": "allin",
+          "freq": 0,
+          "evBB": 0
+        }
+      ],
+      "explanation": {
+        "ja": "",
+        "en": "",
+        "zh-Hant": ""
+      },
+      "terms": []
+    }
+  ]
+}

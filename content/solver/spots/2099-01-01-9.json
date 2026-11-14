@@ -1,0 +1,73 @@
+{
+  "id": "2099-01-01-9",
+  "situation": "srp_sb_bb",
+  "oopRange": "ranges/srp_sb_bb_oop.json",
+  "ipRange": "ranges/srp_sb_bb_ip.json",
+  "startingPotBB": 5,
+  "effectiveStackBB": 97.5,
+  "board": [
+    "9s",
+    "8s",
+    "2d",
+    "Jc",
+    "4h"
+  ],
+  "startStreet": "flop",
+  "betSizes": {
+    "flop": {
+      "oop": {
+        "bet": "67%",
+        "raise": "3x"
+      },
+      "ip": {
+        "bet": "67%",
+        "raise": "3x"
+      }
+    },
+    "turn": {
+      "oop": {
+        "bet": "67%",
+        "raise": "3x"
+      },
+      "ip": {
+        "bet": "67%",
+        "raise": "3x"
+      }
+    },
+    "river": {
+      "oop": {
+        "bet": "33%,67%",
+        "raise": "3x"
+      },
+      "ip": {
+        "bet": "33%,67%,a",
+        "raise": "3x"
+      }
+    }
+  },
+  "hero": {
+    "player": "ip",
+    "cards": [
+      "Ah",
+      "Th"
+    ]
+  },
+  "decisionPath": [
+    "Check",
+    "Check",
+    "Check",
+    "Bet(3.4)",
+    "Call",
+    "Check"
+  ],
+  "accuracy": {
+    "targetExploitabilityPctPot": 0.3,
+    "maxIterations": 1000
+  },
+  "options": [
+    "check",
+    "bet33",
+    "bet67",
+    "allin"
+  ]
+}
