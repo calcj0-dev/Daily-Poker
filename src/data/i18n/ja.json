@@ -32,9 +32,9 @@
     "progress": "{i} / {total}",
     "hero": "あなた",
     "villain": "相手",
-    "pot": "ポット {pot}BB",
-    "stack": "残り {stack}BB",
-    "facing": "相手が {amount}BB をベット",
+    "pot": "ポット {pot}",
+    "stack": "残り {stack}",
+    "facing": "相手が {amount} をベット",
     "yourTurn": "あなたの番です",
     "history": "ここまでの流れ",
     "folded": "フォールド",
@@ -49,7 +49,7 @@
     "allin": "オールイン",
     "fold": "フォールド",
     "call": "コール",
-    "raise": "レイズ {amount}BB"
+    "raise": "レイズ {amount}"
   },
   "streets": {
     "flop": "フロップ",
@@ -65,10 +65,10 @@
     "BB": "BB"
   },
   "historyActions": {
-    "raise": "{who}が {amount}BB にレイズ",
+    "raise": "{who}が {amount} にレイズ",
     "call": "{who}がコール",
     "check": "{who}がチェック",
-    "bet": "{who}が {amount}BB をベット",
+    "bet": "{who}が {amount} をベット",
     "fold": "{who}がフォールド",
     "folds": "{who}がフォールド"
   },
@@ -78,7 +78,7 @@
     "red": "損した",
     "yourChoice": "あなた：{action}",
     "solverMix": "GTO の割合",
-    "evLoss": "GTO との差：{loss}BB（ポットの{pct}%）",
+    "evLoss": "GTO との差：ポットの{pct}%",
     "evLossZero": "GTO との差：ほぼなし",
     "next": "次の問題へ",
     "toResult": "結果を見る"
@@ -124,7 +124,7 @@
   },
   "basis": {
     "heading": "問題の前提",
-    "body": "6人のテーブル、全員のチップは最低の賭け額の100倍、場代なし。2人が残った場面だけを出題。計算：postflop-solver（b-inary、無料）。持っていそうな手の前提は、Daily Poker が独自に作ったもので、理論上の正解ではありません。",
+    "body": "6人のテーブル。ブラインドは 50/100（BB は 100）、全員のチップは 10,000（BB の100倍）、場代なし。2人が残った場面だけを出題。計算：postflop-solver（b-inary、無料）。持っていそうな手の前提は、Daily Poker が独自に作ったもので、理論上の正解ではありません。",
     "grading": "🟩 GTO との差がポットの{g}%以下　🟨 {y}%以下、または GTO も{f}%以上選ぶ行動　🟥 それより大きい"
   },
   "privacy": {

@@ -23,6 +23,8 @@ export type AppConfig = {
   actions: Record<string, { kind: string; potFraction?: number }>;
   storageKey: string;
   links: { portal: string; follow: string; googlePrivacy: string; gaOptout: string; vercelPrivacy: string };
+  /** 画面に出す金額。データは BB で持ち、画面ではチップの数（BB×bigBlind）で出す */
+  display: { smallBlind: number; bigBlind: number };
   languages: {
     default: Locale;
     available: Locale[];

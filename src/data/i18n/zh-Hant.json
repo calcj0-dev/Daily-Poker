@@ -32,9 +32,9 @@
     "progress": "{i} / {total}",
     "hero": "你",
     "villain": "對手",
-    "pot": "底池 {pot}BB",
-    "stack": "剩餘 {stack}BB",
-    "facing": "對手下注 {amount}BB",
+    "pot": "底池 {pot}",
+    "stack": "剩餘 {stack}",
+    "facing": "對手下注 {amount}",
     "yourTurn": "輪到你行動",
     "history": "目前為止的行動",
     "folded": "棄牌",
@@ -49,7 +49,7 @@
     "allin": "全下",
     "fold": "棄牌",
     "call": "跟注",
-    "raise": "加注 {amount}BB"
+    "raise": "加注 {amount}"
   },
   "streets": {
     "flop": "翻牌",
@@ -65,10 +65,10 @@
     "BB": "BB"
   },
   "historyActions": {
-    "raise": "{who}加注到 {amount}BB",
+    "raise": "{who}加注到 {amount}",
     "call": "{who}跟注",
     "check": "{who}過牌",
-    "bet": "{who}下注 {amount}BB",
+    "bet": "{who}下注 {amount}",
     "fold": "{who}棄牌",
     "folds": "{who}棄牌"
   },
@@ -78,7 +78,7 @@
     "red": "虧了",
     "yourChoice": "你：{action}",
     "solverMix": "GTO 的比例",
-    "evLoss": "與 GTO 的差距：{loss}BB（底池的 {pct}%）",
+    "evLoss": "與 GTO 的差距：底池的 {pct}%",
     "evLossZero": "與 GTO 的差距：幾乎沒有",
     "next": "下一題",
     "toResult": "查看結果"
@@ -124,7 +124,7 @@
   },
   "basis": {
     "heading": "題目前提",
-    "body": "6 人桌，所有人籌碼為 100BB，不抽水。只出兩人對決的情境。計算：postflop-solver（b-inary，免費）。手牌範圍為本站自行設定，並非理論上的正解。",
+    "body": "6 人桌。盲注 50/100（BB 為 100），所有人起始籌碼 10,000（BB 的 100 倍），不抽水。只出兩人對決的情境。計算：postflop-solver（b-inary，免費）。手牌範圍為本站自行設定，並非理論上的正解。",
     "grading": "🟩 與 GTO 的差距 ≤ 底池的 {g}%　🟨 ≤ {y}%，或 GTO 也有 {f}% 以上選擇此行動　🟥 其他"
   },
   "privacy": {

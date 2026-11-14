@@ -23,14 +23,14 @@ export type SpotProps = {
 
 const MARK_KEY = { g: 'green', y: 'yellow', r: 'red' } as const;
 
-/** 数を画面用に（小数1けたまで、余計な 0 は付けない） */
-export function bb(n: number): string {
-  return String(Math.round(n * 10) / 10);
+/** BB で持っている額を、画面用のチップの数に（ブラインド 50/100 なら 9.1BB → 910。言語に合わせて桁区切り） */
+export function chips(bbAmount: number): string {
+  return new Intl.NumberFormat(getLocale()).format(Math.round(bbAmount * config.display.bigBlind));
 }
 
 function actionLabel(spot: Spot, id: string): string {
   const o = spot.options.find((x) => x.id === id);
-  return t(`actionLabels.${id}`, { amount: o?.sizeBB !== undefined ? bb(o.sizeBB) : '' });
+  return t(`actionLabels.${id}`, { amount: o?.sizeBB !== undefined ? chips(o.sizeBB) : '' });
 }
 
 function who(spot: Spot, actor: HistoryItem['actor']): string {
@@ -49,7 +49,7 @@ function historyBlock(spot: Spot): HTMLElement {
         ? t('historyActions.folds', { who: e.positions.join(t('spot.listSep')) })
         : t(`historyActions.${e.item.action}`, {
             who: who(spot, e.item.actor),
-            amount: e.item.amountBB !== undefined ? bb(e.item.amountBB) : '',
+            amount: e.item.amountBB !== undefined ? chips(e.item.amountBB) : '',
           });
     const last = groups[groups.length - 1];
     if (last && last.street === street) last.lines.push(line);
@@ -104,8 +104,8 @@ function tableBlock(spot: Spot): HTMLElement {
       [
         h('span', { className: 'seat6-pos' }, [pos, pos === 'BTN' ? h('span', { className: 'dealer', text: 'D' }) : null]),
         h('span', { className: 'seat6-sub', text: isVillain ? t('spot.villain') : t('spot.folded') }),
-        isVillain ? h('span', { className: 'seat6-sub', text: `${bb(villainStack)}BB` }) : null,
-        isVillain && spot.facing ? h('span', { className: 'seat6-bet', text: `${bb(spot.facing.amountBB)}BB` }) : null,
+        isVillain ? h('span', { className: 'seat6-sub', text: chips(villainStack) }) : null,
+        isVillain && spot.facing ? h('span', { className: 'seat6-bet', text: chips(spot.facing.amountBB) }) : null,
       ],
     );
   });
@@ -114,7 +114,7 @@ function tableBlock(spot: Spot): HTMLElement {
     h('div', { className: 'felt-center' }, [
       h('span', { className: 'street', text: t(`streets.${spot.street}`) }),
       cardRow(spot.board),
-      h('span', { className: 'pot' }, [termEl('pot', t('spot.pot', { pot: bb(spot.potBB) }))]),
+      h('span', { className: 'pot' }, [termEl('pot', t('spot.pot', { pot: chips(spot.potBB) }))]),
     ]),
     ...others,
   ]);
@@ -125,12 +125,12 @@ function tableBlock(spot: Spot): HTMLElement {
       h('span', { className: 'seat-pos' }, [spot.hero.position, spot.hero.position === 'BTN' ? h('span', { className: 'dealer', text: 'D' }) : null]),
     ]),
     cardRow(spot.hero.cards, 'lg'),
-    h('span', { className: 'muted small', text: t('spot.stack', { stack: bb(spot.effectiveStackBB) }) }),
+    h('span', { className: 'muted small', text: t('spot.stack', { stack: chips(spot.effectiveStackBB) }) }),
   ]);
 
   return h('div', { className: 'table', attrs: { 'aria-label': t('spot.table') } }, [
     felt,
-    spot.facing ? h('p', { className: 'facing', text: t('spot.facing', { amount: bb(spot.facing.amountBB) }) }) : null,
+    spot.facing ? h('p', { className: 'facing', text: t('spot.facing', { amount: chips(spot.facing.amountBB) }) }) : null,
     hero,
   ]);
 }

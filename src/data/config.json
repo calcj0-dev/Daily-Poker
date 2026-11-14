@@ -81,5 +81,9 @@
       "en",
       "zh-Hant"
     ]
+  },
+  "display": {
+    "smallBlind": 50,
+    "bigBlind": 100
   }
 }

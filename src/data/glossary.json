@@ -18,15 +18,15 @@
     "bb": {
       "ja": {
         "term": "BB",
-        "short": "ビッグブラインド。最低の賭け額。チップの量はこの何倍かで数える"
+        "short": "ビッグブラインド。最初に 100 を払う席。このアプリの最低の賭け額"
       },
       "en": {
         "term": "BB",
-        "short": "Big blind. Chip amounts are counted in big blinds"
+        "short": "Big blind. The seat that posts 100 first; the minimum bet in this app"
       },
       "zh-Hant": {
         "term": "BB",
-        "short": "大盲注。籌碼量以大盲的倍數計算"
+        "short": "大盲注。先投入 100 的位置，也是本 App 的最小下注額"
       }
     },
     "check": {
@@ -186,15 +186,15 @@
     "sb": {
       "ja": {
         "term": "SB",
-        "short": "スモールブラインド。BB の半分を最初に払う席"
+        "short": "スモールブラインド。最初に 50（BB の半分）を払う席"
       },
       "en": {
         "term": "SB",
-        "short": "Small blind. Posts half a big blind"
+        "short": "Small blind. The seat that posts 50 (half the big blind) first"
       },
       "zh-Hant": {
         "term": "SB",
-        "short": "小盲注。先投入半個大盲"
+        "short": "小盲注。先投入 50（大盲的一半）的位置"
       }
     },
     "range": {
@@ -214,15 +214,15 @@
     "ev": {
       "ja": {
         "term": "EV",
-        "short": "その行動を選んだときに、平均でどれだけ得をするか（BB で表す）"
+        "short": "その行動を選んだときに、平均でどれだけ得をするか"
       },
       "en": {
         "term": "EV",
-        "short": "Expected value: average profit of an action, in BB"
+        "short": "Expected value: the average profit of an action"
       },
       "zh-Hant": {
         "term": "EV",
-        "short": "期望值：某個行動平均能贏多少，以 BB 計"
+        "short": "期望值：某個行動平均能贏多少"
       }
     },
     "gto": {

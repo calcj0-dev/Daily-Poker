@@ -32,9 +32,9 @@
     "progress": "{i} / {total}",
     "hero": "You",
     "villain": "Opponent",
-    "pot": "Pot {pot}BB",
-    "stack": "Stack {stack}BB",
-    "facing": "Opponent bets {amount}BB",
+    "pot": "Pot {pot}",
+    "stack": "Stack {stack}",
+    "facing": "Opponent bets {amount}",
     "yourTurn": "Your action",
     "history": "Action so far",
     "folded": "Folded",
@@ -49,7 +49,7 @@
     "allin": "All-in",
     "fold": "Fold",
     "call": "Call",
-    "raise": "Raise {amount}BB"
+    "raise": "Raise {amount}"
   },
   "streets": {
     "flop": "Flop",
@@ -65,10 +65,10 @@
     "BB": "BB"
   },
   "historyActions": {
-    "raise": "{who} raises to {amount}BB",
+    "raise": "{who} raises to {amount}",
     "call": "{who} calls",
     "check": "{who} checks",
-    "bet": "{who} bets {amount}BB",
+    "bet": "{who} bets {amount}",
     "fold": "{who} folds",
     "folds": "{who} fold"
   },
@@ -78,7 +78,7 @@
     "red": "Mistake",
     "yourChoice": "You: {action}",
     "solverMix": "GTO frequencies",
-    "evLoss": "EV loss: {loss}BB ({pct}% of pot)",
+    "evLoss": "EV loss: {pct}% of pot",
     "evLossZero": "EV loss: almost none",
     "next": "Next spot",
     "toResult": "See results"
@@ -124,7 +124,7 @@
   },
   "basis": {
     "heading": "Assumptions",
-    "body": "6-handed, 100BB effective, no rake. Only heads-up spots. Solver: postflop-solver (b-inary, free). Ranges are our own and are not a theoretical truth.",
+    "body": "6-handed. Blinds 50/100 (BB is 100), everyone starts with 10,000 chips (100 big blinds), no rake. Only heads-up spots. Solver: postflop-solver (b-inary, free). Ranges are our own and are not a theoretical truth.",
     "grading": "🟩 EV loss ≤ {g}% of pot   🟨 ≤ {y}%, or GTO takes it ≥ {f}% of the time   🟥 otherwise"
   },
   "privacy": {
