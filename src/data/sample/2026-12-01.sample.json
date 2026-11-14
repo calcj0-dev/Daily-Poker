@@ -2,108 +2,89 @@
   "date": "2026-12-01",
   "number": 1,
   "sample": true,
-  "note": "見本のデータ。1問目だけは本物の計算（お試しの1問）。2〜5問目の数字は計算していない（形を示すだけ）。公開用の検査では sample:true を通さない",
+  "note": "見本：作成中の1日目（2099-01-01）の写し。数字は本物の計算。画面の確認用で、公開用の検査では sample:true を通さない",
   "spots": [
     {
       "id": "2026-12-01-1",
       "index": 1,
       "tags": [
-        "turn",
-        "check"
+        "flop",
+        "bluff"
       ],
       "spotType": "srp_btn_bb",
       "hero": {
-        "position": "BTN",
+        "position": "BB",
         "cards": [
-          "Ad",
-          "Jd"
+          "Jh",
+          "Th"
         ]
       },
       "villain": {
-        "position": "BB"
+        "position": "BTN"
       },
       "board": [
         "Qd",
-        "7c",
-        "3s",
-        "8h"
+        "8c",
+        "3s"
       ],
-      "street": "turn",
-      "potBB": 9.1,
-      "effectiveStackBB": 95.7,
+      "street": "flop",
+      "potBB": 5.5,
+      "effectiveStackBB": 97.5,
       "history": [
         {
           "street": "preflop",
-          "actor": "hero",
+          "actor": "villain",
           "action": "raise",
           "amountBB": 2.5
         },
         {
           "street": "preflop",
-          "actor": "villain",
+          "actor": "hero",
           "action": "call"
-        },
-        {
-          "street": "flop",
-          "actor": "villain",
-          "action": "check"
         },
         {
           "street": "flop",
           "actor": "hero",
-          "action": "bet",
-          "amountBB": 1.8
-        },
-        {
-          "street": "flop",
-          "actor": "villain",
-          "action": "call"
-        },
-        {
-          "street": "turn",
-          "actor": "villain",
           "action": "check"
         }
       ],
-      "facing": null,
+      "facing": {
+        "action": "bet",
+        "amountBB": 1.8
+      },
       "options": [
         {
-          "id": "check",
-          "freq": 1,
-          "evBB": 2.579
+          "evBB": 0,
+          "freq": 0,
+          "id": "fold"
         },
         {
-          "id": "bet33",
-          "freq": 0,
-          "evBB": 2.306
+          "evBB": 1.367,
+          "freq": 0.3807,
+          "id": "call"
         },
         {
-          "id": "bet67",
-          "freq": 0,
-          "evBB": 1.861
-        },
-        {
-          "id": "allin",
-          "freq": 0,
-          "evBB": -2.367
+          "evBB": 1.357,
+          "freq": 0.6193,
+          "id": "raise",
+          "sizeBB": 5.5
         }
       ],
       "explanation": {
-        "ja": "A ハイで賭けても、相手のもっと強い手は降りず、降りるのはもともとこちらが勝っている弱い手ばかりです。チェックすれば、タダで次のカードを見られ、A が出れば一気に強くなります。GTO はここで賭けずに回します。",
-        "en": "Betting ace-high here folds out only weaker hands you already beat, while stronger hands keep calling. Checking lets you see the river for free, and an ace makes you much stronger. GTO checks behind.",
-        "zh-Hant": "拿 A 高牌下注時，更強的牌不會棄牌，會棄牌的大多是你本來就贏的弱牌。過牌可以免費看河牌，而且發出 A 時你會變得很強。GTO 在這裡選擇過牌。"
+        "ja": "相手の小さい賭けには、まだ何もできていない手も多く混ざっています。ここで上げると、そうした手を降ろせるうえ、付いてこられても 9 が出ればストレートになります。GTO はレイズを多めに混ぜ、コールもほぼ同じくらい良い答えです。",
+        "en": "A small bet here includes many hands that have nothing yet. Raising folds those out, and even when called, a 9 gives you a straight. GTO raises more often, and calling is almost as good.",
+        "zh-Hant": "對手的小注裡混有許多還沒成牌的手牌。這時加注可以逼退這些牌，就算被跟注，河牌或轉牌發出 9 也能成順子。GTO 較常加注，跟注也幾乎一樣好。"
       },
       "terms": [
-        "check",
-        "bet",
-        "turn",
+        "raise",
+        "call",
         "gto"
       ],
       "solver": {
         "betSizes": {
           "flop": {
             "ip": {
-              "bet": "33%",
+              "bet": "33%,67%",
               "raise": "3x"
             },
             "oop": {
@@ -123,22 +104,22 @@
           },
           "turn": {
             "ip": {
-              "bet": "33%,67%,a",
-              "raise": "3x"
+              "bet": "67%",
+              "raise": "a"
             },
             "oop": {
               "bet": "67%",
-              "raise": "3x"
+              "raise": "a"
             }
           }
         },
         "commit": "9d1509fe5077d019825f833eed04b16d342dfda1",
-        "exploitabilityPctPot": 0.2958,
+        "exploitabilityPctPot": 0.2994,
         "ipRange": "ranges/srp_btn_bb_ip.json",
         "oopRange": "ranges/srp_btn_bb_oop.json",
         "rangesVersion": "oop:1 ip:1",
         "solvedAt": "2026-11-14",
-        "spotFile": "solver/spots/trial-c1.json",
+        "spotFile": "solver/spots/2099-01-01-1.json",
         "startStreet": "flop",
         "targetExploitabilityPctPot": 0.3,
         "tool": "postflop-solver"
@@ -148,25 +129,148 @@
       "id": "2026-12-01-2",
       "index": 2,
       "tags": [
-        "turn",
-        "check"
+        "flop",
+        "3betpot",
+        "bluffcatch"
       ],
-      "spotType": "srp_btn_bb",
+      "spotType": "3bp_bb_btn",
       "hero": {
-        "position": "BB",
+        "position": "BTN",
         "cards": [
-          "5s",
-          "4s"
+          "Th",
+          "Tc"
         ]
       },
       "villain": {
-        "position": "BTN"
+        "position": "BB"
       },
       "board": [
-        "Kh",
-        "8s",
-        "3c",
-        "2d"
+        "Ac",
+        "9d",
+        "5h"
+      ],
+      "street": "flop",
+      "potBB": 21.5,
+      "effectiveStackBB": 89.5,
+      "history": [
+        {
+          "street": "preflop",
+          "actor": "hero",
+          "action": "raise",
+          "amountBB": 2.5
+        },
+        {
+          "street": "preflop",
+          "actor": "villain",
+          "action": "raise",
+          "amountBB": 10.5
+        },
+        {
+          "street": "preflop",
+          "actor": "hero",
+          "action": "call"
+        }
+      ],
+      "facing": {
+        "action": "bet",
+        "amountBB": 7.1
+      },
+      "options": [
+        {
+          "evBB": 0,
+          "freq": 1,
+          "id": "fold"
+        },
+        {
+          "evBB": -1.109,
+          "freq": 0,
+          "id": "call"
+        },
+        {
+          "evBB": -1.7,
+          "freq": 0,
+          "id": "raise",
+          "sizeBB": 21.3
+        }
+      ],
+      "explanation": {
+        "ja": "上げ返してきた相手の手は強い手にしぼられていて、A を含む手や 10 より大きいペアがほとんどです。この場で 10 のペアが勝てる手はわずかしかありません。小さい賭けでも、払い続けると損になるので、GTO は降ります。",
+        "en": "A player who 3-bet has a strong range: mostly hands with an ace or pairs bigger than tens. Very few of those hands lose to your tens on this board. Even against a small bet, calling loses money, so GTO folds.",
+        "zh-Hant": "會 3-bet 的對手範圍很強，大多是含 A 的牌或比 10 大的對子。在這個牌面上，你的一對 10 能贏的牌非常少。即使對方只下小注，跟注也會虧，所以 GTO 選擇棄牌。"
+      },
+      "terms": [
+        "3bet",
+        "fold",
+        "gto"
+      ],
+      "solver": {
+        "betSizes": {
+          "flop": {
+            "ip": {
+              "bet": "",
+              "raise": "3x"
+            },
+            "oop": {
+              "bet": "33%,67%",
+              "raise": "3x"
+            }
+          },
+          "river": {
+            "ip": {
+              "bet": "67%",
+              "raise": "a"
+            },
+            "oop": {
+              "bet": "67%",
+              "raise": "a"
+            }
+          },
+          "turn": {
+            "ip": {
+              "bet": "67%",
+              "raise": "a"
+            },
+            "oop": {
+              "bet": "67%",
+              "raise": "a"
+            }
+          }
+        },
+        "commit": "9d1509fe5077d019825f833eed04b16d342dfda1",
+        "exploitabilityPctPot": 0.2449,
+        "ipRange": "ranges/3bp_bb_btn_ip.json",
+        "oopRange": "ranges/3bp_bb_btn_oop.json",
+        "rangesVersion": "oop:1 ip:1",
+        "solvedAt": "2026-11-14",
+        "spotFile": "solver/spots/2099-01-01-2.json",
+        "startStreet": "flop",
+        "targetExploitabilityPctPot": 0.3,
+        "tool": "postflop-solver"
+      }
+    },
+    {
+      "id": "2026-12-01-3",
+      "index": 3,
+      "tags": [
+        "turn",
+        "check"
+      ],
+      "spotType": "srp_co_bb",
+      "hero": {
+        "position": "CO",
+        "cards": [
+          "Qh",
+          "Qc"
+        ]
+      },
+      "villain": {
+        "position": "BB"
+      },
+      "board": [
+        "Ah",
+        "7c",
+        "2d",
+        "Ks"
       ],
       "street": "turn",
       "potBB": 9.1,
@@ -174,82 +278,268 @@
       "history": [
         {
           "street": "preflop",
-          "actor": "villain",
+          "actor": "hero",
           "action": "raise",
           "amountBB": 2.5
         },
         {
           "street": "preflop",
-          "actor": "hero",
+          "actor": "villain",
           "action": "call"
         },
         {
           "street": "flop",
-          "actor": "hero",
+          "actor": "villain",
           "action": "check"
         },
         {
           "street": "flop",
-          "actor": "villain",
+          "actor": "hero",
           "action": "bet",
           "amountBB": 1.8
         },
         {
           "street": "flop",
-          "actor": "hero",
+          "actor": "villain",
           "action": "call"
+        },
+        {
+          "street": "turn",
+          "actor": "villain",
+          "action": "check"
         }
       ],
       "facing": null,
       "options": [
         {
-          "id": "check",
-          "freq": 0.85,
-          "evBB": 1.6
+          "evBB": 4.065,
+          "freq": 0.9989,
+          "id": "check"
         },
         {
-          "id": "bet33",
-          "freq": 0.1,
-          "evBB": 1.55
+          "evBB": 3.962,
+          "freq": 0.0011,
+          "id": "bet33"
         },
         {
-          "id": "bet67",
-          "freq": 0.05,
-          "evBB": 1.5
-        },
-        {
-          "id": "allin",
+          "evBB": 3.034,
           "freq": 0,
-          "evBB": -2.1
+          "id": "bet67"
+        },
+        {
+          "evBB": 1.676,
+          "freq": 0,
+          "id": "allin"
         }
       ],
       "explanation": {
-        "ja": "（見本）ストレートの見込みはあるが、まだ何もできていない。先に賭けるより、チェックして相手の出方を見るのが GTO。",
-        "en": "(Sample) You have a straight draw but nothing made yet. GTO prefers checking to see what the opponent does.",
-        "zh-Hant": "（範例）有順子聽牌但還沒成牌。GTO 傾向過牌，看對手怎麼行動。"
+        "ja": "Q のペアは、場の A と K より下です。賭けると、払ってくるのは A や K を持った強い手ばかりで、もっと弱い手は降りてしまいます。チェックして、安く勝負まで持ち込むのが GTO です。",
+        "en": "Your queens are below both the ace and the king on board. If you bet, mostly stronger hands with an ace or king will call, while weaker hands fold. GTO checks and gets to showdown cheaply.",
+        "zh-Hant": "一對 Q 比牌面上的 A 和 K 都小。下注的話，會跟注的大多是有 A 或 K 的更強牌，較弱的牌則會棄牌。GTO 選擇過牌，便宜地走到攤牌。"
       },
       "terms": [
         "check",
-        "turn",
         "gto"
       ],
       "solver": {
-        "tool": "postflop-solver",
-        "commit": "<実行時に記録>",
-        "rangesVersion": "<範囲ファイルの版>",
-        "oopRange": "ranges/srp_btn_bb_oop.json",
-        "ipRange": "ranges/srp_btn_bb_ip.json",
-        "startStreet": "turn",
-        "betSizes": "<solver/spot ファイルに記録>",
+        "betSizes": {
+          "flop": {
+            "ip": {
+              "bet": "33%",
+              "raise": "3x"
+            },
+            "oop": {
+              "bet": "67%",
+              "raise": "3x"
+            }
+          },
+          "river": {
+            "ip": {
+              "bet": "67%",
+              "raise": "a"
+            },
+            "oop": {
+              "bet": "67%",
+              "raise": "a"
+            }
+          },
+          "turn": {
+            "ip": {
+              "bet": "33%,67%,a",
+              "raise": "3x"
+            },
+            "oop": {
+              "bet": "33%,67%",
+              "raise": "3x"
+            }
+          }
+        },
+        "commit": "9d1509fe5077d019825f833eed04b16d342dfda1",
+        "exploitabilityPctPot": 0.2994,
+        "ipRange": "ranges/srp_co_bb_ip.json",
+        "oopRange": "ranges/srp_co_bb_oop.json",
+        "rangesVersion": "oop:1 ip:1",
+        "solvedAt": "2026-11-14",
+        "spotFile": "solver/spots/2099-01-01-3.json",
+        "startStreet": "flop",
         "targetExploitabilityPctPot": 0.3,
-        "exploitabilityPctPot": null,
-        "solvedAt": null,
-        "spotFile": "solver/spots/2026-12-01-2.json"
+        "tool": "postflop-solver"
       }
     },
     {
-      "id": "2026-12-01-3",
-      "index": 3,
+      "id": "2026-12-01-4",
+      "index": 4,
+      "tags": [
+        "river",
+        "value",
+        "betsize"
+      ],
+      "spotType": "srp_btn_bb",
+      "hero": {
+        "position": "BTN",
+        "cards": [
+          "Kd",
+          "Th"
+        ]
+      },
+      "villain": {
+        "position": "BB"
+      },
+      "board": [
+        "Kc",
+        "8d",
+        "4h",
+        "2s",
+        "7c"
+      ],
+      "street": "river",
+      "potBB": 9.1,
+      "effectiveStackBB": 95.7,
+      "history": [
+        {
+          "street": "preflop",
+          "actor": "hero",
+          "action": "raise",
+          "amountBB": 2.5
+        },
+        {
+          "street": "preflop",
+          "actor": "villain",
+          "action": "call"
+        },
+        {
+          "street": "flop",
+          "actor": "villain",
+          "action": "check"
+        },
+        {
+          "street": "flop",
+          "actor": "hero",
+          "action": "bet",
+          "amountBB": 1.8
+        },
+        {
+          "street": "flop",
+          "actor": "villain",
+          "action": "call"
+        },
+        {
+          "street": "turn",
+          "actor": "villain",
+          "action": "check"
+        },
+        {
+          "street": "turn",
+          "actor": "hero",
+          "action": "check"
+        },
+        {
+          "street": "river",
+          "actor": "villain",
+          "action": "check"
+        }
+      ],
+      "facing": null,
+      "options": [
+        {
+          "evBB": 8.121,
+          "freq": 0,
+          "id": "check"
+        },
+        {
+          "evBB": 9.757,
+          "freq": 0.5439,
+          "id": "bet33"
+        },
+        {
+          "evBB": 9.576,
+          "freq": 0.4561,
+          "id": "bet67"
+        },
+        {
+          "evBB": 4.07,
+          "freq": 0,
+          "id": "allin"
+        }
+      ],
+      "explanation": {
+        "ja": "ターンでチェックしたので、相手からは K のペアを持っているように見えにくくなっています。相手には 8 や 7 のペア、弱い K などが多く残っていて、そこから払ってもらえます。賭ける額は小さくても大きくても、GTO ではどちらも近い答えです。",
+        "en": "Because you checked the turn, your opponent is less likely to put you on a king. They still have many eights, sevens and weaker kings that will pay you off. GTO bets, and the small and large sizes are both close to correct.",
+        "zh-Hant": "因為你在轉牌過牌，對手不太會認為你有一對 K。對手手上還有許多 8、7 的對子和較弱的 K，會付錢給你。GTO 選擇下注，小注和大注都是接近正確的答案。"
+      },
+      "terms": [
+        "value",
+        "bet",
+        "gto"
+      ],
+      "solver": {
+        "betSizes": {
+          "flop": {
+            "ip": {
+              "bet": "33%",
+              "raise": "3x"
+            },
+            "oop": {
+              "bet": "67%",
+              "raise": "3x"
+            }
+          },
+          "river": {
+            "ip": {
+              "bet": "33%,67%,a",
+              "raise": "3x"
+            },
+            "oop": {
+              "bet": "33%,67%",
+              "raise": "3x"
+            }
+          },
+          "turn": {
+            "ip": {
+              "bet": "67%",
+              "raise": "3x"
+            },
+            "oop": {
+              "bet": "67%",
+              "raise": "3x"
+            }
+          }
+        },
+        "commit": "9d1509fe5077d019825f833eed04b16d342dfda1",
+        "exploitabilityPctPot": 0.2867,
+        "ipRange": "ranges/srp_btn_bb_ip.json",
+        "oopRange": "ranges/srp_btn_bb_oop.json",
+        "rangesVersion": "oop:1 ip:1",
+        "solvedAt": "2026-11-14",
+        "spotFile": "solver/spots/2099-01-01-4.json",
+        "startStreet": "flop",
+        "targetExploitabilityPctPot": 0.3,
+        "tool": "postflop-solver"
+      }
+    },
+    {
+      "id": "2026-12-01-5",
+      "index": 5,
       "tags": [
         "river",
         "bluffcatch"
@@ -258,23 +548,23 @@
       "hero": {
         "position": "BB",
         "cards": [
-          "Ah",
-          "9h"
+          "Js",
+          "4s"
         ]
       },
       "villain": {
         "position": "BTN"
       },
       "board": [
-        "Kd",
-        "8s",
-        "3c",
-        "7h",
-        "2d"
+        "Jd",
+        "7s",
+        "2c",
+        "9h",
+        "3d"
       ],
       "street": "river",
-      "potBB": 9.1,
-      "effectiveStackBB": 95.7,
+      "potBB": 21.3,
+      "effectiveStackBB": 89.6,
       "history": [
         {
           "street": "preflop",
@@ -311,7 +601,13 @@
         {
           "street": "turn",
           "actor": "villain",
-          "action": "check"
+          "action": "bet",
+          "amountBB": 6.1
+        },
+        {
+          "street": "turn",
+          "actor": "hero",
+          "action": "call"
         },
         {
           "street": "river",
@@ -321,264 +617,79 @@
       ],
       "facing": {
         "action": "bet",
-        "amountBB": 6.1
+        "amountBB": 14.3
       },
       "options": [
         {
-          "id": "fold",
-          "freq": 0.42,
-          "evBB": 0
-        },
-        {
-          "id": "call",
-          "freq": 0.58,
-          "evBB": 0.12
-        },
-        {
-          "id": "raise",
-          "sizeBB": 18.3,
+          "evBB": 0,
           "freq": 0,
-          "evBB": -1.9
+          "id": "fold"
+        },
+        {
+          "evBB": 1.453,
+          "freq": 1,
+          "id": "call"
+        },
+        {
+          "evBB": -0.218,
+          "freq": 0,
+          "id": "raise",
+          "sizeBB": 43
         }
       ],
       "explanation": {
-        "ja": "（見本）A ハイで勝てる相手のブラフがある程度残っている。払う額は、払った後のポット全体の約3割なので、3割以上勝てればコールで得。GTO はコールとフォールドを混ぜる。",
-        "en": "(Sample) Ace-high still beats some of the opponent's bluffs. You need about 30% equity to call; GTO mixes call and fold.",
-        "zh-Hant": "（範例）A 高牌仍能贏對手的部分詐唬。跟注需要約 30% 勝率；GTO 混合跟注與棄牌。"
+        "ja": "3回続けて賭けられると強そうに見えますが、相手の賭けには、ストレートになりそこねた手も混ざっています。払う額は、払ったあとのポット全体の3割ほどなので、3回に1回ほど勝てれば損はしません。J のペアはそうしたはったりに勝てるので、GTO は払います。",
+        "en": "Three bets in a row look strong, but your opponent also bets with missed straight draws. You are paying about 30% of the final pot, so winning about one time in three is enough. Your pair of jacks beats those bluffs, so GTO calls.",
+        "zh-Hant": "連續三次下注看起來很強，但對手的下注裡也混有沒成順子的牌。你要付的金額約占跟注後底池的三成，所以三次能贏一次左右就不虧。一對 J 能贏這些詐唬，所以 GTO 選擇跟注。"
       },
       "terms": [
         "call",
-        "fold",
         "bluff",
-        "mixed",
         "gto"
       ],
       "solver": {
-        "tool": "postflop-solver",
-        "commit": "<実行時に記録>",
-        "rangesVersion": "<範囲ファイルの版>",
-        "oopRange": "ranges/srp_btn_bb_oop.json",
+        "betSizes": {
+          "flop": {
+            "ip": {
+              "bet": "33%",
+              "raise": "3x"
+            },
+            "oop": {
+              "bet": "67%",
+              "raise": "3x"
+            }
+          },
+          "river": {
+            "ip": {
+              "bet": "67%",
+              "raise": "3x"
+            },
+            "oop": {
+              "bet": "",
+              "raise": "3x"
+            }
+          },
+          "turn": {
+            "ip": {
+              "bet": "67%",
+              "raise": "3x"
+            },
+            "oop": {
+              "bet": "67%",
+              "raise": "3x"
+            }
+          }
+        },
+        "commit": "9d1509fe5077d019825f833eed04b16d342dfda1",
+        "exploitabilityPctPot": 0.2623,
         "ipRange": "ranges/srp_btn_bb_ip.json",
-        "startStreet": "river",
-        "betSizes": "<solver/spot ファイルに記録>",
-        "targetExploitabilityPctPot": 0.3,
-        "exploitabilityPctPot": null,
-        "solvedAt": null,
-        "spotFile": "solver/spots/2026-12-01-3.json"
-      }
-    },
-    {
-      "id": "2026-12-01-4",
-      "index": 4,
-      "tags": [
-        "river",
-        "bluff"
-      ],
-      "spotType": "srp_co_bb",
-      "hero": {
-        "position": "CO",
-        "cards": [
-          "Qc",
-          "Jc"
-        ]
-      },
-      "villain": {
-        "position": "BB"
-      },
-      "board": [
-        "9d",
-        "5s",
-        "2h",
-        "Ks",
-        "4d"
-      ],
-      "street": "river",
-      "potBB": 9.1,
-      "effectiveStackBB": 95.7,
-      "history": [
-        {
-          "street": "preflop",
-          "actor": "hero",
-          "action": "raise",
-          "amountBB": 2.5
-        },
-        {
-          "street": "preflop",
-          "actor": "villain",
-          "action": "call"
-        },
-        {
-          "street": "flop",
-          "actor": "villain",
-          "action": "check"
-        },
-        {
-          "street": "flop",
-          "actor": "hero",
-          "action": "bet",
-          "amountBB": 1.8
-        },
-        {
-          "street": "flop",
-          "actor": "villain",
-          "action": "call"
-        },
-        {
-          "street": "turn",
-          "actor": "villain",
-          "action": "check"
-        },
-        {
-          "street": "turn",
-          "actor": "hero",
-          "action": "check"
-        },
-        {
-          "street": "river",
-          "actor": "villain",
-          "action": "check"
-        }
-      ],
-      "facing": null,
-      "options": [
-        {
-          "id": "check",
-          "freq": 0.3,
-          "evBB": 0.8
-        },
-        {
-          "id": "bet33",
-          "freq": 0,
-          "evBB": 0.4
-        },
-        {
-          "id": "bet67",
-          "freq": 0.7,
-          "evBB": 1.05
-        },
-        {
-          "id": "allin",
-          "freq": 0,
-          "evBB": 0.6
-        }
-      ],
-      "explanation": {
-        "ja": "（見本）Q ハイではほとんど勝てない。K が出て、相手より自分の方が強い手を多く持っていそうな場面。大きめに賭けるブラフが GTO。",
-        "en": "(Sample) Queen-high rarely wins at showdown, and the king favors your range. GTO bluffs with a larger size.",
-        "zh-Hant": "（範例）Q 高牌攤牌很少贏，而 K 對你的範圍有利。GTO 用較大尺寸詐唬。"
-      },
-      "terms": [
-        "bluff",
-        "bet",
-        "river",
-        "gto"
-      ],
-      "solver": {
-        "tool": "postflop-solver",
-        "commit": "<実行時に記録>",
-        "rangesVersion": "<範囲ファイルの版>",
-        "oopRange": "ranges/srp_co_bb_oop.json",
-        "ipRange": "ranges/srp_co_bb_ip.json",
-        "startStreet": "river",
-        "betSizes": "<solver/spot ファイルに記録>",
-        "targetExploitabilityPctPot": 0.3,
-        "exploitabilityPctPot": null,
-        "solvedAt": null,
-        "spotFile": "solver/spots/2026-12-01-4.json"
-      }
-    },
-    {
-      "id": "2026-12-01-5",
-      "index": 5,
-      "tags": [
-        "flop",
-        "3betpot",
-        "betsize"
-      ],
-      "spotType": "3bp_bb_btn",
-      "hero": {
-        "position": "BB",
-        "cards": [
-          "Qd",
-          "Qs"
-        ]
-      },
-      "villain": {
-        "position": "BTN"
-      },
-      "board": [
-        "Js",
-        "7d",
-        "4c"
-      ],
-      "street": "flop",
-      "potBB": 21.5,
-      "effectiveStackBB": 89.5,
-      "history": [
-        {
-          "street": "preflop",
-          "actor": "villain",
-          "action": "raise",
-          "amountBB": 2.5
-        },
-        {
-          "street": "preflop",
-          "actor": "hero",
-          "action": "raise",
-          "amountBB": 10.5
-        },
-        {
-          "street": "preflop",
-          "actor": "villain",
-          "action": "call"
-        }
-      ],
-      "facing": null,
-      "options": [
-        {
-          "id": "check",
-          "freq": 0.15,
-          "evBB": 12.1
-        },
-        {
-          "id": "bet33",
-          "freq": 0.8,
-          "evBB": 12.4
-        },
-        {
-          "id": "bet67",
-          "freq": 0.05,
-          "evBB": 12.2
-        },
-        {
-          "id": "allin",
-          "freq": 0,
-          "evBB": 9.8
-        }
-      ],
-      "explanation": {
-        "ja": "（見本）3ベットしたポットで、場より強いペア。小さく賭けて、相手の弱いペアや見込みのある手から払ってもらうのが GTO。",
-        "en": "(Sample) An overpair in a 3-bet pot. GTO bets small to get value from weaker pairs and draws.",
-        "zh-Hant": "（範例）3-bet 底池中的超對。GTO 小注下注，從較弱的對子和聽牌中獲取價值。"
-      },
-      "terms": [
-        "3bet",
-        "value",
-        "bet",
-        "gto"
-      ],
-      "solver": {
-        "tool": "postflop-solver",
-        "commit": "<実行時に記録>",
-        "rangesVersion": "<範囲ファイルの版>",
-        "oopRange": "ranges/3bp_bb_btn_oop.json",
-        "ipRange": "ranges/3bp_bb_btn_ip.json",
+        "oopRange": "ranges/srp_btn_bb_oop.json",
+        "rangesVersion": "oop:1 ip:1",
+        "solvedAt": "2026-11-14",
+        "spotFile": "solver/spots/2099-01-01-5.json",
         "startStreet": "flop",
-        "betSizes": "<solver/spot ファイルに記録>",
         "targetExploitabilityPctPot": 0.3,
-        "exploitabilityPctPot": null,
-        "solvedAt": null,
-        "spotFile": "solver/spots/2026-12-01-5.json"
+        "tool": "postflop-solver"
       }
     }
   ]

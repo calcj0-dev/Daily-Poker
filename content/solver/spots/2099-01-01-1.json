@@ -6,19 +6,19 @@
   "startingPotBB": 5.5,
   "effectiveStackBB": 97.5,
   "board": [
-    "Ts",
-    "9h",
-    "4c"
+    "Qd",
+    "8c",
+    "3s"
   ],
   "startStreet": "flop",
   "betSizes": {
     "flop": {
       "oop": {
-        "bet": "33%,67%",
+        "bet": "",
         "raise": "3x"
       },
       "ip": {
-        "bet": "33%,67%,a",
+        "bet": "33%,67%",
         "raise": "3x"
       }
     },
@@ -44,23 +44,23 @@
     }
   },
   "hero": {
-    "player": "ip",
+    "player": "oop",
     "cards": [
-      "Ac",
-      "5d"
+      "Jh",
+      "Th"
     ]
   },
   "decisionPath": [
-    "Check"
+    "Check",
+    "Bet(1.8)"
   ],
   "accuracy": {
     "targetExploitabilityPctPot": 0.3,
     "maxIterations": 1000
   },
   "options": [
-    "check",
-    "bet33",
-    "bet67",
-    "allin"
+    "fold",
+    "call",
+    "raise"
   ]
 }

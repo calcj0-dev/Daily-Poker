@@ -1,0 +1,61 @@
+{
+  "note": "予備（1日目で使わなかった案。元の番号 8・9 は計算済み）",
+  "spots": [
+    {
+      "type": "srp_co_bb",
+      "hero": "BB",
+      "cards": [
+        "8h",
+        "7h"
+      ],
+      "board": [
+        "Th",
+        "6h",
+        "3c",
+        "Qs"
+      ],
+      "flop": [
+        "hero check",
+        "villain bet 33",
+        "hero call"
+      ],
+      "turn": [
+        "hero check",
+        "villain bet 67"
+      ],
+      "tags": [
+        "bluff"
+      ]
+    },
+    {
+      "type": "srp_sb_bb",
+      "hero": "BB",
+      "cards": [
+        "Ah",
+        "Th"
+      ],
+      "board": [
+        "9s",
+        "8s",
+        "2d",
+        "Jc",
+        "4h"
+      ],
+      "flop": [
+        "villain check",
+        "hero check"
+      ],
+      "turn": [
+        "villain check",
+        "hero bet 67",
+        "villain call"
+      ],
+      "river": [
+        "villain check"
+      ],
+      "tags": [
+        "bluff"
+      ]
+    }
+  ]
+}

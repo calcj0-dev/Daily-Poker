@@ -1,24 +1,24 @@
 {
   "id": "2099-01-01-2",
-  "situation": "srp_btn_bb",
-  "oopRange": "ranges/srp_btn_bb_oop.json",
-  "ipRange": "ranges/srp_btn_bb_ip.json",
-  "startingPotBB": 5.5,
-  "effectiveStackBB": 97.5,
+  "situation": "3bp_bb_btn",
+  "oopRange": "ranges/3bp_bb_btn_oop.json",
+  "ipRange": "ranges/3bp_bb_btn_ip.json",
+  "startingPotBB": 21.5,
+  "effectiveStackBB": 89.5,
   "board": [
-    "Qd",
-    "8c",
-    "3s"
+    "Ac",
+    "9d",
+    "5h"
   ],
   "startStreet": "flop",
   "betSizes": {
     "flop": {
       "oop": {
-        "bet": "",
+        "bet": "33%,67%",
         "raise": "3x"
       },
       "ip": {
-        "bet": "33%,67%",
+        "bet": "",
         "raise": "3x"
       }
     },
@@ -44,15 +44,14 @@
     }
   },
   "hero": {
-    "player": "oop",
+    "player": "ip",
     "cards": [
-      "Jh",
-      "Th"
+      "Th",
+      "Tc"
     ]
   },
   "decisionPath": [
-    "Check",
-    "Bet(1.8)"
+    "Bet(7.1)"
   ],
   "accuracy": {
     "targetExploitabilityPctPot": 0.3,
