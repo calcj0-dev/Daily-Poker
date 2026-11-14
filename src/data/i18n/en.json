@@ -44,12 +44,16 @@
   },
   "actionLabels": {
     "check": "Check",
-    "bet33": "Bet 1/3",
-    "bet67": "Bet 2/3",
-    "allin": "All-in",
+    "bet33": "Bet {amount}",
+    "bet67": "Bet {amount}",
+    "allin": "All-in {amount}",
     "fold": "Fold",
     "call": "Call",
     "raise": "Raise {amount}"
+  },
+  "actionSub": {
+    "bet33": "1/3 pot",
+    "bet67": "2/3 pot"
   },
   "streets": {
     "flop": "Flop",

@@ -28,9 +28,30 @@ export function chips(bbAmount: number): string {
   return new Intl.NumberFormat(getLocale()).format(Math.round(bbAmount * config.display.bigBlind));
 }
 
-function actionLabel(spot: Spot, id: string): string {
+/**
+ * その行動で賭ける額（BB）。データに sizeBB があればそれ、ベットは今のポット×割合、
+ * オールインは残りのチップ。額のない行動（チェック・コール・フォールド）は undefined
+ */
+export function actionAmountBB(spot: Pick<Spot, 'options' | 'potBB' | 'effectiveStackBB'>, id: string): number | undefined {
   const o = spot.options.find((x) => x.id === id);
-  return t(`actionLabels.${id}`, { amount: o?.sizeBB !== undefined ? chips(o.sizeBB) : '' });
+  if (o?.sizeBB !== undefined) return o.sizeBB;
+  const action = config.actions[id];
+  // 計算した額は 10 チップ単位（0.1BB）に丸める（実際のテーブルで1枚単位の額は出ないため）
+  if (action?.kind === 'bet' && action.potFraction !== undefined) return Math.round(spot.potBB * action.potFraction * 10) / 10;
+  if (action?.kind === 'allin') return spot.effectiveStackBB;
+  return undefined;
+}
+
+function actionLabel(spot: Spot, id: string): string {
+  const amount = actionAmountBB(spot, id);
+  return t(`actionLabels.${id}`, { amount: amount !== undefined ? chips(amount) : '' });
+}
+
+/** ボタンの下に小さく出す説明（ベットの「ポットの1/3」など）。なければ null */
+function actionSub(id: string): string | null {
+  const key = `actionSub.${id}`;
+  const s = t(key);
+  return s === key ? null : s;
 }
 
 function who(spot: Spot, actor: HistoryItem['actor']): string {
@@ -201,7 +222,9 @@ export function spotScreen(props: SpotProps): Screen {
       'div',
       { className: 'options' },
       spot.options.map((o) => {
-        const b = button(actionLabel(spot, o.id), () => choose(o.id), 'btn btn-option');
+        const b = button('', () => choose(o.id), 'btn btn-option');
+        const sub = actionSub(o.id);
+        b.append(h('span', { className: 'option-main', text: actionLabel(spot, o.id) }), sub ? h('span', { className: 'option-sub', text: sub }) : '');
         if (revealed) {
           b.disabled = true;
           if (o.id === revealed.chosen) b.classList.add('chosen');

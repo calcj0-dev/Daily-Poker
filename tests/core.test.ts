@@ -189,3 +189,15 @@ describe('T-08 シェアの文', () => {
     }
   });
 });
+
+describe('選択肢の額', () => {
+  it('ベットはポット×割合、オールインは残り、レイズはデータの額', async () => {
+    const { actionAmountBB } = await import('../src/ui/screens/spot');
+    const s1 = spot(0);
+    expect(actionAmountBB(s1, 'bet33')).toBe(1.8);
+    expect(actionAmountBB(s1, 'bet67')).toBe(3.7);
+    expect(actionAmountBB(s1, 'allin')).toBe(97.5);
+    expect(actionAmountBB(s1, 'check')).toBeUndefined();
+    expect(actionAmountBB(spot(2), 'raise')).toBe(18.3);
+  });
+});

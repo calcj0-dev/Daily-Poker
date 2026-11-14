@@ -44,12 +44,16 @@
   },
   "actionLabels": {
     "check": "過牌",
-    "bet33": "下注 1/3",
-    "bet67": "下注 2/3",
-    "allin": "全下",
+    "bet33": "下注 {amount}",
+    "bet67": "下注 {amount}",
+    "allin": "全下 {amount}",
     "fold": "棄牌",
     "call": "跟注",
     "raise": "加注 {amount}"
+  },
+  "actionSub": {
+    "bet33": "底池的 1/3",
+    "bet67": "底池的 2/3"
   },
   "streets": {
     "flop": "翻牌",

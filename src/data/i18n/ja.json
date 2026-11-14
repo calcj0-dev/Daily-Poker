@@ -44,12 +44,16 @@
   },
   "actionLabels": {
     "check": "チェック",
-    "bet33": "ベット 1/3",
-    "bet67": "ベット 2/3",
-    "allin": "オールイン",
+    "bet33": "ベット {amount}",
+    "bet67": "ベット {amount}",
+    "allin": "オールイン {amount}",
     "fold": "フォールド",
     "call": "コール",
     "raise": "レイズ {amount}"
+  },
+  "actionSub": {
+    "bet33": "ポットの1/3",
+    "bet67": "ポットの2/3"
   },
   "streets": {
     "flop": "フロップ",
