@@ -1,7 +1,7 @@
 // 「ここまでの流れ」に、ほかの4人がフォールドしたところを足す。
 // 問題のデータ（history）は2人の行動だけを持つので、席の順から組み立てる
 
-import type { HistoryItem, Position, Spot } from './types';
+import type { HistoryItem, Position, Spot } from './types.ts';
 
 /** プリフロップで行動する順（6人のテーブル） */
 export const SEATS: Position[] = ['UTG', 'HJ', 'CO', 'BTN', 'SB', 'BB'];

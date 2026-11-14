@@ -4,12 +4,13 @@ import { config } from '../../data';
 import { monthDay } from '../../core/date';
 import { lossDisplay, type Grade } from '../../core/grade';
 import { MARK_EMOJI } from '../../core/share';
-import { foldedSeats, fullHistory, SEATS } from '../../core/history';
+import { fullHistory, SEATS } from '../../core/history';
+import { buildReplay, type ReplayStep, type SeatAction } from '../../core/replay';
 import type { HistoryItem, Spot } from '../../core/types';
 import { isMachineTranslated, getLocale, t } from '../../i18n';
 import type { Session } from '../../session';
 import type { Screen } from '../app';
-import { cardRow } from '../cards';
+import { cardParts, cardRow } from '../cards';
 import { button, h } from '../dom';
 import { termEl, withTerms } from '../glossaryTip';
 import { footer, settingsButton } from '../parts';
@@ -58,8 +59,8 @@ function who(spot: Spot, actor: HistoryItem['actor']): string {
   return actor === 'hero' ? t('spot.you', { pos: spot.hero.position }) : spot.villain.position;
 }
 
-/** 「ここまでの流れ」を開いているか（最初は開いておく。答えた後に描き直しても状態を保つ） */
-let historyOpen = true;
+/** 文字の「ここまでの流れ」を開いているか（再生があるので最初は閉じる。描き直しても状態を保つ） */
+let historyOpen = false;
 
 function historyBlock(spot: Spot): HTMLElement {
   const groups: { street: string; lines: string[] }[] = [];
@@ -106,54 +107,77 @@ const SLOTS: [number, number][] = [
   [91, 80],
 ];
 
-function tableBlock(spot: Spot): HTMLElement {
-  const facing = spot.facing?.amountBB ?? 0;
-  // 2人とも 100BB から始まるので、残りは同じ。相手が今ベットしていれば、その分だけ少ない
-  const villainStack = spot.effectiveStackBB - facing;
-  const folded = new Set(foldedSeats(spot));
+/** 席の吹き出しの文（フォールド・チェック・コール・レイズ 250 など） */
+function seatActionText(a: SeatAction): string {
+  return t(`seatActions.${a.action}`, { amount: a.amountBB !== undefined ? chips(a.amountBB) : '' });
+}
+
+function bubble(a: SeatAction | undefined): HTMLElement | null {
+  if (!a) return null;
+  return h('span', { className: `seat-bubble act-${a.action}`, text: seatActionText(a) });
+}
+
+/** 再生の場面の説明（テーブルの下に出す1行） */
+function captionText(spot: Spot, step: ReplayStep): string {
+  const c = step.caption;
+  if (c.kind === 'blinds') return t('historyActions.blinds', { sb: chips(0.5), bb: chips(1) });
+  if (c.kind === 'folds') return t('historyActions.folds', { who: c.positions.join(t('spot.listSep')) });
+  if (c.kind === 'deal') return t('spot.deal', { street: t(`streets.${c.street}`), cards: spot.board.slice(0, step.boardCount).map(cardText).join(' ') });
+  if (c.kind === 'facing') return t('spot.facing', { amount: chips(c.amountBB) });
+  return t(`historyActions.${c.item.action}`, {
+    who: who(spot, c.item.actor),
+    amount: c.item.amountBB !== undefined ? chips(c.item.amountBB) : '',
+  });
+}
+
+function cardText(card: string): string {
+  const p = cardParts(card);
+  return `${p.rank}${p.symbol}`;
+}
+
+/** テーブルの真ん中に出すポット：集まった分＋この段階で賭けている分（採点の基準のポットと同じ） */
+function totalPot(step: ReplayStep): number {
+  return step.potBB + Object.values(step.bets).reduce<number>((a, v) => a + (v ?? 0), 0);
+}
+
+function tableBlock(spot: Spot, step: ReplayStep): HTMLElement {
+  const folded = new Set(step.folded);
+  const actors = new Set(step.actors);
   const heroAt = SEATS.indexOf(spot.hero.position);
 
   const others = SLOTS.map(([x, y], k) => {
     const pos = SEATS[(heroAt + k + 1) % SEATS.length]!;
     const isVillain = pos === spot.villain.position;
-    return h(
-      'div',
-      {
-        className: `seat6${folded.has(pos) ? ' folded' : ''}${isVillain ? ' villain' : ''}`,
-        attrs: { style: `left:${x}%;top:${y}%` },
-      },
-      [
-        h('span', { className: 'seat6-pos' }, [pos, pos === 'BTN' ? h('span', { className: 'dealer', text: 'D' }) : null]),
-        h('span', { className: 'seat6-sub', text: isVillain ? t('spot.villain') : t('spot.folded') }),
-        isVillain ? h('span', { className: 'seat6-sub', text: chips(villainStack) }) : null,
-        isVillain && spot.facing ? h('span', { className: 'seat6-bet', text: chips(spot.facing.amountBB) }) : null,
-      ],
-    );
+    const cls = ['seat6', folded.has(pos) ? 'folded' : '', isVillain ? 'villain' : '', actors.has(pos) ? 'acting' : ''].filter(Boolean).join(' ');
+    return h('div', { className: cls, attrs: { style: `left:${x}%;top:${y}%` } }, [
+      h('span', { className: 'seat6-pos' }, [pos, pos === 'BTN' ? h('span', { className: 'dealer', text: 'D' }) : null]),
+      isVillain ? h('span', { className: 'seat6-sub', text: t('spot.villain') }) : null,
+      folded.has(pos) ? null : h('span', { className: 'seat6-sub', text: chips(step.stacks[pos]) }),
+      bubble(step.last[pos] ?? (folded.has(pos) ? { action: 'fold' } : undefined)),
+    ]);
   });
 
   const felt = h('div', { className: 'felt' }, [
     h('div', { className: 'felt-center' }, [
-      h('span', { className: 'street', text: t(`streets.${spot.street}`) }),
-      cardRow(spot.board),
-      h('span', { className: 'pot' }, [termEl('pot', t('spot.pot', { pot: chips(spot.potBB) }))]),
+      h('span', { className: 'street', text: step.street === 'preflop' ? '' : t(`streets.${step.street}`) }),
+      step.boardCount ? cardRow(spot.board.slice(0, step.boardCount)) : h('span', { className: 'board-empty' }),
+      h('span', { className: 'pot' }, [termEl('pot', t('spot.pot', { pot: chips(totalPot(step)) }))]),
     ]),
     ...others,
   ]);
 
-  const hero = h('div', { className: 'hero-seat' }, [
+  const heroPos = spot.hero.position;
+  const hero = h('div', { className: `hero-seat${actors.has(heroPos) ? ' acting' : ''}` }, [
     h('div', { className: 'seat-name' }, [
       h('strong', { text: t('spot.hero') }),
-      h('span', { className: 'seat-pos' }, [spot.hero.position, spot.hero.position === 'BTN' ? h('span', { className: 'dealer', text: 'D' }) : null]),
+      h('span', { className: 'seat-pos' }, [heroPos, heroPos === 'BTN' ? h('span', { className: 'dealer', text: 'D' }) : null]),
+      bubble(step.last[heroPos]),
     ]),
     cardRow(spot.hero.cards, 'lg'),
-    h('span', { className: 'muted small', text: t('spot.stack', { stack: chips(spot.effectiveStackBB) }) }),
+    h('span', { className: 'muted small', text: t('spot.stack', { stack: chips(step.stacks[heroPos]) }) }),
   ]);
 
-  return h('div', { className: 'table', attrs: { 'aria-label': t('spot.table') } }, [
-    felt,
-    spot.facing ? h('p', { className: 'facing', text: t('spot.facing', { amount: chips(spot.facing.amountBB) }) }) : null,
-    hero,
-  ]);
+  return h('div', { className: 'table', attrs: { 'aria-label': t('spot.table') } }, [felt, hero]);
 }
 
 function revealBlock(spot: Spot, chosen: string, g: Grade, isLast: boolean, onNext: () => void): HTMLElement {
@@ -183,16 +207,65 @@ function revealBlock(spot: Spot, chosen: string, g: Grade, isLast: boolean, onNe
   ]);
 }
 
+/** 再生で1手を見せる時間（ミリ秒） */
+const STEP_MS = 1100;
+
 export function spotScreen(props: SpotProps): Screen {
   const { session } = props;
   let index = session.next() ?? 0;
   let revealed: { chosen: string; grade: Grade } | null = null;
   let host: HTMLElement | null = null;
 
+  // 再生：問題の前に、テーブルの上で1手ずつ見せる
+  let steps: ReplayStep[] = buildReplay(session.spot(index));
+  let step = 0;
+  let replaying = true;
+  let timer: ReturnType<typeof setTimeout> | undefined;
+
   session.started();
 
+  function stopAuto(): void {
+    clearTimeout(timer);
+    timer = undefined;
+  }
+
+  function startReplay(): void {
+    stopAuto();
+    steps = buildReplay(session.spot(index));
+    step = 0;
+    replaying = true;
+    redraw();
+    auto();
+  }
+
+  function auto(): void {
+    stopAuto();
+    timer = setTimeout(() => {
+      if (step < steps.length - 1) {
+        step++;
+        redraw();
+        auto();
+      } else {
+        finishReplay();
+      }
+    }, STEP_MS);
+  }
+
+  function finishReplay(): void {
+    stopAuto();
+    step = steps.length - 1;
+    replaying = false;
+    redraw();
+  }
+
+  function go(delta: number): void {
+    stopAuto();
+    step = Math.max(0, Math.min(steps.length - 1, step + delta));
+    redraw();
+  }
+
   function choose(id: string): void {
-    if (revealed) return;
+    if (revealed || replaying) return;
     revealed = { chosen: id, grade: session.answer(index, id) };
     redraw();
     host?.querySelector('.reveal')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -206,8 +279,8 @@ export function spotScreen(props: SpotProps): Screen {
     }
     index = n;
     revealed = null;
-    redraw();
     window.scrollTo(0, 0);
+    startReplay();
   }
 
   function redraw(): void {
@@ -215,9 +288,40 @@ export function spotScreen(props: SpotProps): Screen {
     host.replaceChildren(...content().filter((x): x is HTMLElement => x !== null));
   }
 
+  function replayControls(spot: Spot): HTMLElement {
+    const cur = steps[step]!;
+    const prev = button('◀', () => go(-1), 'btn btn-step');
+    prev.disabled = step === 0;
+    prev.setAttribute('aria-label', t('replay.prev'));
+    const fwd = button('▶', () => (step === steps.length - 1 ? finishReplay() : go(1)), 'btn btn-step');
+    fwd.setAttribute('aria-label', t('replay.next'));
+    return h('div', { className: 'replay' }, [
+      h('p', { className: 'replay-caption', attrs: { 'aria-live': 'polite' } }, [captionText(spot, cur)]),
+      h('div', { className: 'replay-controls' }, [
+        prev,
+        h('span', { className: 'replay-count', text: t('replay.step', { i: step + 1, n: steps.length }) }),
+        fwd,
+        button(t('replay.skip'), finishReplay, 'btn btn-skip'),
+      ]),
+    ]);
+  }
+
   function content(): (HTMLElement | null)[] {
     const spot = session.spot(index);
     const { m, d } = monthDay(session.puzzle.date);
+    const header = h('header', { className: 'spot-bar' }, [
+      button('←', () => {
+        stopAuto();
+        props.onBack();
+      }, 'btn-icon'),
+      h('span', { text: `${m}/${d} #${session.puzzle.number}` }),
+      h('span', { className: 'progress', text: t('spot.progress', { i: index + 1, total: config.spotsPerDay }) }),
+      settingsButton(),
+    ]);
+    const cur = steps[step] ?? steps[steps.length - 1]!;
+
+    if (replaying) return [header, tableBlock(spot, cur), replayControls(spot)];
+
     const options = h(
       'div',
       { className: 'options' },
@@ -233,24 +337,27 @@ export function spotScreen(props: SpotProps): Screen {
       }),
     );
     return [
-      h('header', { className: 'spot-bar' }, [
-        button('←', props.onBack, 'btn-icon'),
-        h('span', { text: `${m}/${d} #${session.puzzle.number}` }),
-        h('span', { className: 'progress', text: t('spot.progress', { i: index + 1, total: config.spotsPerDay }) }),
-        settingsButton(),
+      header,
+      tableBlock(spot, cur),
+      h('div', { className: 'replay-again' }, [
+        spot.facing ? h('p', { className: 'facing', text: t('spot.facing', { amount: chips(spot.facing.amountBB) }) }) : null,
+        button(t('replay.again'), startReplay, 'link'),
       ]),
-      spot.history.length ? historyBlock(spot) : null,
-      tableBlock(spot),
       revealed ? null : h('p', { className: 'your-turn', text: t('spot.yourTurn') }),
       options,
       revealed ? revealBlock(spot, revealed.chosen, revealed.grade, session.next() === null, next) : null,
+      spot.history.length ? historyBlock(spot) : null,
     ];
   }
 
   return {
     render() {
       host = h('div', { className: 'page spot' }, content());
+      if (replaying && !timer) auto();
       return h('div', {}, [host, footer()]);
+    },
+    dispose() {
+      stopAuto();
     },
   };
 }

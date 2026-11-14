@@ -40,7 +40,15 @@
     "folded": "フォールド",
     "listSep": "・",
     "you": "あなた（{pos}）",
-    "table": "6人のテーブル"
+    "table": "6人のテーブル",
+    "deal": "{street}：{cards}"
+  },
+  "replay": {
+    "prev": "戻る",
+    "next": "次へ",
+    "skip": "飛ばす",
+    "again": "流れをもう一度見る",
+    "step": "{i} / {n}"
   },
   "actionLabels": {
     "check": "チェック",
@@ -74,7 +82,16 @@
     "check": "{who}がチェック",
     "bet": "{who}が {amount} をベット",
     "fold": "{who}がフォールド",
-    "folds": "{who}がフォールド"
+    "folds": "{who}がフォールド",
+    "blinds": "SB が {sb}、BB が {bb} を置く"
+  },
+  "seatActions": {
+    "blind": "{amount}",
+    "fold": "フォールド",
+    "check": "チェック",
+    "call": "コール",
+    "raise": "レイズ {amount}",
+    "bet": "ベット {amount}"
   },
   "reveal": {
     "green": "GTO どおり",

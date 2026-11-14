@@ -789,3 +789,104 @@ body.modal-open {
   font-weight: 400;
   color: var(--text-sub);
 }
+
+/* ---- ハンドの再生 ---- */
+.seat-bubble {
+  margin-top: 2px;
+  padding: 0 7px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  background: #dfe9fb;
+  color: #1d4ea8;
+}
+
+.seat-bubble.act-fold {
+  background: var(--line);
+  color: var(--text-sub);
+}
+
+.seat-bubble.act-raise,
+.seat-bubble.act-bet {
+  background: #fbe3e4;
+  color: #b0242c;
+}
+
+.seat-bubble.act-blind {
+  background: var(--surface);
+  color: var(--text-sub);
+  font-weight: 400;
+}
+
+.seat6.acting,
+.hero-seat.acting .seat-name {
+  box-shadow: 0 0 0 3px var(--yellow);
+}
+
+.seat6.folded.acting {
+  opacity: 0.7;
+}
+
+.seat6 {
+  transition: opacity 0.3s, box-shadow 0.2s;
+}
+
+.hero-seat .seat-name {
+  border-radius: 10px;
+  padding: 2px 6px;
+  align-items: center;
+}
+
+.board-empty {
+  height: 48px;
+}
+
+.replay {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.replay-caption {
+  min-height: 3.2em;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--surface);
+  font-weight: 700;
+  text-align: center;
+}
+
+.replay-controls {
+  display: grid;
+  grid-template-columns: 56px 1fr 56px auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.replay-count {
+  text-align: center;
+  color: var(--text-sub);
+  font-size: 14px;
+}
+
+.btn-step {
+  min-height: 48px;
+  padding: 0;
+  font-size: 18px;
+}
+
+.btn-step:disabled {
+  opacity: 0.35;
+}
+
+.btn-skip {
+  min-height: 48px;
+}
+
+.replay-again {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}

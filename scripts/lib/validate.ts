@@ -2,6 +2,7 @@
 // ビルドの前（scripts/validate-puzzles.ts）とテストで動く。
 // Node からそのまま読めるよう、ここでは型だけを import し、データは引数で受け取る
 
+import { replayMismatch } from './replayCheck.ts';
 import type { DailyPuzzle, Spot } from '../../src/core/types';
 
 type Tree = { [key: string]: string | Tree };
@@ -175,6 +176,15 @@ function validateSpot(s: Spot, expectedIndex: number, date: string, ctx: Validat
     if ((h.action === 'raise' || h.action === 'bet') && !isNum(h.amountBB)) at(`history の ${h.action} に amountBB がありません`);
   }
   if (!Array.isArray(s.history)) at('history がありません');
+
+  // 流れとポット・残りのチップ・場のカードのつじつま（ハンドの再生と同じ計算）
+  if (Array.isArray(s.history) && Array.isArray(s.board) && isNum(s.potBB) && isNum(s.effectiveStackBB)) {
+    try {
+      for (const e of replayMismatch(s)) at(e);
+    } catch (e) {
+      at(`流れを再生できません：${(e as Error).message}`);
+    }
+  }
 
   // 選択肢
   const options = Array.isArray(s.options) ? s.options : [];

@@ -40,7 +40,15 @@
     "folded": "Folded",
     "listSep": ", ",
     "you": "You ({pos})",
-    "table": "6-handed table"
+    "table": "6-handed table",
+    "deal": "{street}: {cards}"
+  },
+  "replay": {
+    "prev": "Back",
+    "next": "Next",
+    "skip": "Skip",
+    "again": "Replay the hand",
+    "step": "{i} / {n}"
   },
   "actionLabels": {
     "check": "Check",
@@ -74,7 +82,16 @@
     "check": "{who} checks",
     "bet": "{who} bets {amount}",
     "fold": "{who} folds",
-    "folds": "{who} fold"
+    "folds": "{who} fold",
+    "blinds": "SB posts {sb}, BB posts {bb}"
+  },
+  "seatActions": {
+    "blind": "{amount}",
+    "fold": "Fold",
+    "check": "Check",
+    "call": "Call",
+    "raise": "Raise {amount}",
+    "bet": "Bet {amount}"
   },
   "reveal": {
     "green": "GTO move",
