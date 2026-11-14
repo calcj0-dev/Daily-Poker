@@ -124,7 +124,7 @@ function bubble(a: SeatAction | undefined, pop: boolean): HTMLElement | null {
 
 /** 配る順（SB から時計回り。2枚目はもう1周） */
 const DEAL_ORDER: Position[] = ['SB', 'BB', 'UTG', 'HJ', 'CO', 'BTN'];
-const DEAL_GAP_MS = 90;
+const DEAL_GAP_MS = 130;
 
 /** 伏せたカード2枚。配る・降りるときは動かす */
 function cardBacks(pos: Position, anim: 'deal' | 'fold' | null): HTMLElement {
@@ -222,7 +222,7 @@ function tableBlock(spot: Spot, step: ReplayStep, prev?: ReplayStep): HTMLElemen
           const el = cardEl(card);
           if (prev && i >= prev.boardCount) {
             el.classList.add('flip-in');
-            el.style.animationDelay = `${(i - prev.boardCount) * 180 + (newStreet ? 350 : 0)}ms`;
+            el.style.animationDelay = `${(i - prev.boardCount) * 300 + (newStreet ? 600 : 0)}ms`;
           }
           return el;
         }),
@@ -297,9 +297,9 @@ function revealBlock(spot: Spot, chosen: string, g: Grade, isLast: boolean, onNe
 
 /** 再生で1つの場面を見せる時間（ミリ秒）。配る場面は動きが長いので長めに */
 function stepMs(step: ReplayStep | undefined): number {
-  if (step?.caption.kind === 'holecards') return 1900;
-  if (step?.caption.kind === 'deal') return 1600;
-  return 1200;
+  if (step?.caption.kind === 'holecards') return 2800;
+  if (step?.caption.kind === 'deal') return 2400;
+  return 1800;
 }
 
 export function spotScreen(props: SpotProps): Screen {

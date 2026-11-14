@@ -98,11 +98,12 @@ export function buildReplay(spot: Pick<Spot, 'history' | 'hero' | 'villain' | 'f
 
   for (const e of fullHistory(spot)) {
     if (e.kind === 'folds') {
+      // 再生では1人ずつ降りる（まとめて動くと分かりにくいため）
       for (const p of e.positions) {
         s.folded.add(p);
         s.last[p] = { action: 'fold' };
+        steps.push(snapshot(s, { kind: 'folds', positions: [p] }, [p]));
       }
-      steps.push(snapshot(s, { kind: 'folds', positions: e.positions }, e.positions));
       continue;
     }
     const item = e.item;

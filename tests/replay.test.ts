@@ -28,7 +28,9 @@ describe('ハンドの再生', () => {
     expect(captions(spot)).toEqual([
       'blinds',
       'holecards',
-      'fold UTG,HJ,CO',
+      'fold UTG',
+      'fold HJ',
+      'fold CO',
       'villain raise',
       'fold SB',
       'hero call',

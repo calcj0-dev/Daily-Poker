@@ -1028,32 +1028,32 @@ body.modal-open {
 }
 
 .deal-in {
-  animation: deal-in 0.35s ease-out both;
+  animation: deal-in 0.5s ease-out both;
 }
 
 .fold-out {
-  animation: fold-out 0.6s ease-in both;
+  animation: fold-out 0.9s ease-in both;
 }
 
 .chip-in {
-  animation: chip-in 0.4s ease-out both;
+  animation: chip-in 0.6s ease-out both;
 }
 
 .collect {
-  animation: collect 0.45s ease-in both;
+  animation: collect 0.7s ease-in both;
 }
 
 .flip-in {
-  animation: flip-in 0.4s ease-out both;
+  animation: flip-in 0.6s ease-out both;
 }
 
 .pop {
-  animation: pop 0.35s ease-out both;
+  animation: pop 0.5s ease-out both;
 }
 
 .pulse {
   display: inline-block;
-  animation: pulse 0.45s ease-out 0.3s;
+  animation: pulse 0.6s ease-out 0.5s;
 }
 
 /* 動きを減らす設定の人には動かさない */
